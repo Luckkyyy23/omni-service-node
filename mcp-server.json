@@ -1,0 +1,25 @@
+{
+  "name": "io.github.omni-service/omni-service-node",
+  "description": "Multi-tier agentic data service. EU AI Act compliance, global sanctions screening, market signals, B2B intent intelligence, SEC filings, GitHub velocity. Pay per call via x402 USDC on Base.",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@omni-service/node",
+      "version": "1.0.0",
+      "transport": {
+        "type": "http",
+        "url": "http://localhost:3000/mcp"
+      }
+    }
+  ],
+  "tools": [
+    { "name": "check_ai_compliance",   "description": "EU AI Act risk classification with CISA alerts" },
+    { "name": "check_sanctions",       "description": "OFAC/EU/UN/UK sanctions screening via OpenSanctions" },
+    { "name": "get_market_sentiment",  "description": "Crypto/AI fear-greed index and sector signal" },
+    { "name": "get_market_signal",     "description": "BUY/SELL/HOLD signal with entry/stop/target" },
+    { "name": "get_sec_ai_filings",    "description": "Real-time Fortune 500 8-K AI filings from EDGAR" },
+    { "name": "get_github_ai_velocity","description": "Company GitHub AI pivot score" },
+    { "name": "get_b2b_intel",         "description": "Golden Lead B2B intelligence packets" }
+  ]
+}

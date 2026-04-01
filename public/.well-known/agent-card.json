@@ -1,0 +1,132 @@
+{
+  "name": "Omni Service Node",
+  "description": "The petrol station for autonomous AI agents. 14 pay-per-call endpoints covering every intelligence category: EU AI Act compliance, sanctions screening, market signals, macro economics, real-time news, ArXiv research, on-chain blockchain data, B2B intelligence, GitHub pivot tracking, job signals, SEC filings, USPTO patents, and company profiles. x402 USDC on Base — no accounts, no subscriptions, no rate limits.",
+  "url": "http://localhost:3000",
+  "version": "2.0.0",
+  "provider": { "organization": "Omni Service Node", "url": "http://localhost:3000" },
+  "capabilities": { "streaming": false, "pushNotifications": false, "stateTransitionHistory": false },
+  "defaultInputModes": ["application/json"],
+  "defaultOutputModes": ["application/json"],
+  "skills": [
+    {
+      "id": "ai-compliance",
+      "name": "EU AI Act Compliance",
+      "description": "Classify any AI system against EU Regulation 2024/1689. Prohibited/high-risk/limited-risk/minimal-risk with obligations, deadlines, CISA alerts.",
+      "tags": ["compliance", "regulation", "eu-ai-act", "cisa", "risk"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "sanctions-screen",
+      "name": "Global Sanctions Screening",
+      "description": "Screen entities against OFAC, EU, UN, UK sanctions lists. Match probability, risk level, matched records.",
+      "tags": ["sanctions", "ofac", "aml", "kyc", "compliance"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "market-sentiment",
+      "name": "Crypto & AI Sentiment Feed",
+      "description": "Fear/greed index, CoinGecko global market, asset prices, trending tokens, RISK_ON/RISK_OFF signal.",
+      "tags": ["sentiment", "crypto", "fear-greed", "market", "coingecko"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "market-signals",
+      "name": "Directional Market Signals",
+      "description": "BUY/SELL/HOLD with entry, stop loss, take profit, R:R, RSI, EMA, ATR for Gold, BTC, FX pairs.",
+      "tags": ["trading", "signals", "gold", "bitcoin", "forex", "xauusd"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "macro-intelligence",
+      "name": "Global Macro Economic Data",
+      "description": "Fed rate, US CPI, M2, unemployment, GDP, yield curve, G10 FX. Rate environment: RESTRICTIVE/NEUTRAL/ACCOMMODATIVE.",
+      "tags": ["macro", "federal-reserve", "inflation", "gdp", "yield-curve", "fx"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "news-intelligence",
+      "name": "Real-Time AI & Market News",
+      "description": "HackerNews + Reddit (r/MachineLearning, r/LocalLLaMA) + NewsAPI. Scored articles, trending keywords, signal strength.",
+      "tags": ["news", "hackernews", "reddit", "ai", "market", "tech"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "arxiv-research",
+      "name": "ArXiv AI Research Papers",
+      "description": "Latest cs.AI, cs.LG, cs.CL papers with impact scoring, breakthrough detection, trending topics, author velocity.",
+      "tags": ["research", "arxiv", "papers", "ai", "ml", "llm", "agents"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "onchain-intelligence",
+      "name": "Blockchain & DeFi On-Chain Data",
+      "description": "BTC fees/mempool/hashrate, ETH gas oracle, DeFi TVL from 500+ protocols, top yield opportunities.",
+      "tags": ["blockchain", "bitcoin", "ethereum", "defi", "tvl", "yield", "gas"],
+      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "b2b-intel",
+      "name": "B2B Golden Lead Packets",
+      "description": "Aggregated SEC + GitHub + Jobs into HOT/WARM/COLD scored company leads with AI pivot signals and outreach angles.",
+      "tags": ["b2b", "sales", "leads", "intelligence", "sec", "github"],
+      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "github-velocity",
+      "name": "GitHub AI Pivot Tracker",
+      "description": "Fortune 500 GitHub org analysis — AI repo count, topic pivots, star velocity, commit frequency. Buyer signal.",
+      "tags": ["github", "engineering", "ai-pivot", "velocity", "repositories"],
+      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "job-pivots",
+      "name": "AI Hiring Signal Intelligence",
+      "description": "Companies actively hiring AI roles — strongest buyer signal. Greenhouse, Lever, HackerNews, Remotive.",
+      "tags": ["hiring", "jobs", "ai-roles", "buyer-signal", "growth"],
+      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "sec-filings",
+      "name": "SEC AI Filings Intelligence",
+      "description": "Real-time 8-K/10-K filings from public companies mentioning AI/agentic. AI-scored, direct EDGAR links.",
+      "tags": ["sec", "edgar", "filings", "8-k", "regulatory", "ai"],
+      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "patent-intelligence",
+      "name": "USPTO AI Patent Intelligence",
+      "description": "Who is filing AI, neural network, autonomous agent, LLM patents. USPTO PatentsView full database.",
+      "tags": ["patents", "ip", "uspto", "innovation", "r&d", "ai"],
+      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
+    },
+    {
+      "id": "company-profile",
+      "name": "Full Company Intelligence Dossier",
+      "description": "SEC + GitHub + Jobs + Patents + Community sentiment → lead score with outreach angle. Most comprehensive company profile available.",
+      "tags": ["company", "dossier", "b2b", "lead-score", "sales", "intelligence"],
+      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
+    }
+  ],
+  "securitySchemes": {
+    "x402Payment": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-PAYMENT",
+      "description": "x402 USDC micropayment on Base via Coinbase facilitator"
+    }
+  },
+  "security": [{ "x402Payment": [] }],
+  "x402": {
+    "network": "base",
+    "payTo": "0x2DFe3B1C304DAd9F1b41D780ea81fCd137d810D8",
+    "tiers": {
+      "fuel":    { "path": "/api/v1/*", "price": "0.005 USDC", "endpoints": 8 },
+      "premium": { "path": "/api/v2/*", "price": "5.00 USDC",  "endpoints": 6 }
+    }
+  },
+  "acp": {
+    "marketplace": "https://app.virtuals.io/research/agent-commerce-protocol",
+    "offerings": ["fuel-compliance", "fuel-sentiment", "fuel-signals", "fuel-macro", "fuel-news", "fuel-arxiv", "fuel-onchain", "premium-intel", "premium-sec-filings", "premium-patents", "premium-company-profile"]
+  },
+  "mcp": { "endpoint": "/mcp", "manifest": "/mcp/manifest", "tools": 13 }
+}
