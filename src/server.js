@@ -176,7 +176,7 @@ app.get("/stats", (_req, res) => {
         ],
       },
     },
-    payment:   { protocol: "x402", network: NETWORK_NAME, networkId: NETWORK, token: "USDC" },
+    payment:   { protocol: "direct-transfer", network: NETWORK_NAME, networkId: "eip155:8453", token: "USDC" },
     discovery: { agentCard: "/.well-known/agent-card.json", mcp: "/mcp", llms: "/llms.txt", manifest: "/mcp/manifest" },
     acp:       { marketplace: "https://app.virtuals.io/research/agent-commerce-protocol" },
   });
@@ -189,7 +189,7 @@ app.listen(PORT, async () => {
   console.log(`\n OMNI SERVICE NODE v2.0`);
   console.log(`   Port     : ${PORT}`);
   console.log(`   Wallet   : ${process.env.WALLET_ADDRESS}`);
-  console.log(`   Network  : ${NETWORK_NAME} (${NETWORK})`);
+  console.log(`   Network  : ${NETWORK_NAME} (eip155:8453)`);
   console.log(`   Tier 1   : /api/v1/* — $0.005 USDC  [8 endpoints]`);
   console.log(`   Tier 2   : /api/v2/* — $5.00  USDC  [6 endpoints]`);
   console.log(`   MCP      : /mcp`);
