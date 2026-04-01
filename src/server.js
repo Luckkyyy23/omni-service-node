@@ -240,7 +240,7 @@ app.get("/health", (_req, res) => {
     revenue:   { usdc: stats.revenue.toFixed(3), usd: `$${stats.revenue.toFixed(2)}` },
     wallet:    WALLET,
     network:   NETWORK_NAME,
-    endpoints: { tier1: 29, tier2: 6, bundles: 7, total: 42 },
+    endpoints: { tier1: 36, tier2: 12, bundles: 8, total: 56 },
     timestamp: new Date().toISOString(),
   });
 });
@@ -327,9 +327,9 @@ app.listen(PORT, "0.0.0.0", async () => {
   console.log(`   Port     : ${PORT}`);
   console.log(`   Wallet   : ${process.env.WALLET_ADDRESS}`);
   console.log(`   Network  : ${NETWORK_NAME} (eip155:8453)`);
-  console.log(`   Tier 1   : /api/v1/* — $0.005 USDC  [29 endpoints]`);
-  console.log(`   Tier 2   : /api/v2/* — $5.00  USDC  [6 endpoints]`);
-  console.log(`   Bundles  : /api/bundle/* — $0.50–$500 [7 packages]`);
+  console.log(`   Tier 1   : /api/v1/* — $0.005 USDC  [36 endpoints]`);
+  console.log(`   Tier 2   : /api/v2/* — $5.00–$25   [12 endpoints]`);
+  console.log(`   Bundles  : /api/bundle/* — $0.50–$500 [8 packages]`);
   console.log(`   MCP      : /mcp`);
   console.log(`   Card     : /.well-known/agent-card.json\n`);
 
