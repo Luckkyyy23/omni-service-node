@@ -1,9 +1,9 @@
 {
   "name": "Omni Service Node",
   "description": "The petrol station for autonomous AI agents. 14 pay-per-call endpoints covering every intelligence category: EU AI Act compliance, sanctions screening, market signals, macro economics, real-time news, ArXiv research, on-chain blockchain data, B2B intelligence, GitHub pivot tracking, job signals, SEC filings, USPTO patents, and company profiles. x402 USDC on Base — no accounts, no subscriptions, no rate limits.",
-  "url": "http://localhost:3000",
+  "url": "https://omni-service-node-production.up.railway.app",
   "version": "2.0.0",
-  "provider": { "organization": "Omni Service Node", "url": "http://localhost:3000" },
+  "provider": { "organization": "Omni Service Node", "url": "https://omni-service-node-production.up.railway.app" },
   "capabilities": { "streaming": false, "pushNotifications": false, "stateTransitionHistory": false },
   "defaultInputModes": ["application/json"],
   "defaultOutputModes": ["application/json"],

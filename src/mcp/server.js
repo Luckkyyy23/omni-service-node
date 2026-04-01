@@ -256,7 +256,7 @@ export function createMcpRouter() {
       },
       payment:   { protocol: "x402", token: "USDC" },
       transport: "http",
-      endpoint:  `${process.env.PUBLIC_URL || "http://localhost:3000"}/mcp`,
+      endpoint:  `${process.env.PUBLIC_URL || "https://omni-service-node-production.up.railway.app"}/mcp`,
     });
   });
 
