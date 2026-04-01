@@ -1,0 +1,8 @@
+name: omni-service-node
+displayName: Omni Service Node
+description: "The petrol station for AI agents. 14 pay-per-call endpoints: compliance, sanctions, market signals, macro economics, news, ArXiv research, blockchain data, B2B intel, GitHub velocity, job signals, SEC filings, patents, company profiles. x402 USDC on Base."
+license: MIT
+homepage: https://omni-service-node-production.up.railway.app
+startCommand:
+  type: http
+  url: https://omni-service-node-production.up.railway.app/mcp
