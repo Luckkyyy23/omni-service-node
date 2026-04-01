@@ -1,8 +1,15 @@
 name: omni-service-node
-displayName: Omni Service Node
-description: "The petrol station for AI agents. 14 pay-per-call endpoints: compliance, sanctions, market signals, macro economics, news, ArXiv research, blockchain data, B2B intel, GitHub velocity, job signals, SEC filings, patents, company profiles. x402 USDC on Base."
+displayName: "Omni Service Node — AI Agent Data Marketplace"
+description: >
+  The petrol station for AI agents. 56 pay-per-call endpoints covering every domain
+  AI agents need: market signals, macro economics, geopolitical crisis intelligence
+  (Iran/Israel/Trump), crypto/DeFi, earnings, insider trades, options flow, SEC/USPTO
+  filings, GitHub velocity, company deep dives, sanctions screening, ArXiv research,
+  stablecoins, Bittensor, Virtuals Protocol, whale tracking, and more.
+  All paid in real USDC on Base Mainnet. No subscriptions — pure per-call pricing.
 license: MIT
 homepage: https://omni-service-node-production.up.railway.app
+repository: https://github.com/Luckkyyy23/omni-service-node
 startCommand:
   type: http
   url: https://omni-service-node-production.up.railway.app/mcp
