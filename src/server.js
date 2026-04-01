@@ -185,7 +185,7 @@ app.get("/stats", (_req, res) => {
 // ── Start ──────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, async () => {
+app.listen(PORT, "0.0.0.0", async () => {
   console.log(`\n OMNI SERVICE NODE v2.0`);
   console.log(`   Port     : ${PORT}`);
   console.log(`   Wallet   : ${process.env.WALLET_ADDRESS}`);
