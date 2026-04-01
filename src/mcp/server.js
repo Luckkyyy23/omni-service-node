@@ -377,6 +377,48 @@ function registerTools(server) {
   );
 }
 
+function registerResources(server) {
+  server.resource(
+    "catalog",
+    "omni://catalog",
+    { mimeType: "application/json" },
+    async () => ({
+      contents: [{
+        uri: "omni://catalog",
+        mimeType: "application/json",
+        text: JSON.stringify({
+          name: "omni-service-node",
+          version: "3.0.0",
+          description: "The petrol station for AI agents. 56 pay-per-call endpoints.",
+          tiers: {
+            tier1: { count: 36, price: "$0.005 USDC" },
+            tier2: { count: 12, price: "$5–$25 USDC" },
+            bundles: { count: 8, price: "$0.50–$500 USDC" },
+          },
+          payment: { protocol: "x402", token: "USDC", network: "Base Mainnet" },
+        }, null, 2),
+      }],
+    })
+  );
+}
+
+function registerPrompts(server) {
+  server.prompt(
+    "how_to_use",
+    "How to use Omni Service Node — getting started guide",
+    [],
+    async () => ({
+      messages: [{
+        role: "user",
+        content: {
+          type: "text",
+          text: "Omni Service Node is a pay-per-call data marketplace for AI agents. Call any tool directly — payment is handled automatically via x402 USDC on Base Mainnet. Tier 1 endpoints cost $0.005, Tier 2 cost $5–$25, and Bundles cost $0.50–$500. No API keys required.",
+        },
+      }],
+    })
+  );
+}
+
 // ── Router factory ─────────────────────────────────────────────────────────────
 export function createMcpRouter() {
   const router = Router();
@@ -385,6 +427,8 @@ export function createMcpRouter() {
     try {
       const server = new McpServer({ name: "omni-service-node", version: "3.0.0" });
       registerTools(server);
+      registerResources(server);
+      registerPrompts(server);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
       await server.connect(transport);
       await transport.handleRequest(req, res, req.body);

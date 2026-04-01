@@ -10,6 +10,10 @@ description: >
 license: MIT
 homepage: https://omni-service-node-production.up.railway.app
 repository: https://github.com/Luckkyyy23/omni-service-node
+configSchema:
+  type: object
+  properties: {}
+  description: "No configuration required. Payments handled automatically via x402 USDC on Base Mainnet."
 startCommand:
   type: http
   url: https://omni-service-node-production.up.railway.app/mcp
