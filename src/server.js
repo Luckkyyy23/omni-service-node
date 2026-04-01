@@ -2,10 +2,7 @@ import "dotenv/config";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { paymentMiddleware, x402ResourceServer } from "@x402/express";
-import { ExactEvmScheme } from "@x402/evm/exact/server";
-import { HTTPFacilitatorClient } from "@x402/core/server";
-import { createFacilitatorConfig } from "@coinbase/x402";
+import { createPaymentMiddleware } from "./payment/basePayment.js";
 
 // ── Tier 1 services — $0.005/call ─────────────────────────────────────────────
 import { compliance }  from "./services/tier1/compliance.js";
@@ -47,50 +44,33 @@ app.use((req, res, next) => {
   next();
 });
 
-// ── x402 payment setup ────────────────────────────────────────────────────────
-// Dual-mode:
-//   WITH CDP_API_KEY_ID + CDP_API_KEY_SECRET → Base Mainnet (eip155:8453)
-//     Real USDC — payments collected immediately
-//     Get free keys: https://portal.cdp.coinbase.com/
-//   WITHOUT CDP keys → Base Sepolia testnet (eip155:84532)
-//     Full payment flow works with test USDC
-//     Upgrade: add CDP keys to .env for mainnet
-const CDP_KEYS   = !!(process.env.CDP_API_KEY_ID && process.env.CDP_API_KEY_SECRET);
-const NETWORK    = CDP_KEYS ? "eip155:8453" : "eip155:84532";
-const NETWORK_NAME = CDP_KEYS ? "Base Mainnet" : "Base Sepolia (testnet)";
+// ── Base Mainnet USDC payments — real money, no CDP keys needed ───────────────
+// Direct USDC transfer verification via public Base RPC (https://mainnet.base.org)
+// Agent sends USDC → server verifies tx on-chain → data served
+// No facilitator, no gas from server, no third-party dependencies
+const NETWORK_NAME = "Base Mainnet";
+const WALLET       = process.env.WALLET_ADDRESS;
 
-const facilitatorClient = CDP_KEYS
-  ? new HTTPFacilitatorClient(
-      createFacilitatorConfig(process.env.CDP_API_KEY_ID, process.env.CDP_API_KEY_SECRET)
-    )
-  : new HTTPFacilitatorClient({ url: "https://x402.org/facilitator" });
-
-const resourceServer = new x402ResourceServer(facilitatorClient)
-  .register(NETWORK, new ExactEvmScheme());
-
-const WALLET = process.env.WALLET_ADDRESS;
-
-const x402Routes = {
+const paymentRoutes = {
   // ── Tier 1 — $0.005 USDC ───────────────────────────────────────────────────
-  "GET /api/v1/compliance":   { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "EU AI Act compliance check" },
-  "POST /api/v1/sanctions":   { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "Global sanctions screening" },
-  "GET /api/v1/sentiment":    { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "AI & crypto sentiment feed" },
-  "GET /api/v1/signals":      { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "Directional market signal" },
-  "GET /api/v1/macro":        { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "Global macro economic intelligence" },
-  "GET /api/v1/news":         { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "Real-time AI/market news aggregation" },
-  "GET /api/v1/arxiv":        { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "Latest AI research papers from ArXiv" },
-  "GET /api/v1/onchain":      { accepts: { scheme: "exact", price: "$0.005", network: NETWORK, payTo: WALLET }, description: "Blockchain — BTC/ETH/DeFi on-chain data" },
+  "GET /api/v1/compliance":   { price: "$0.005" },
+  "POST /api/v1/sanctions":   { price: "$0.005" },
+  "GET /api/v1/sentiment":    { price: "$0.005" },
+  "GET /api/v1/signals":      { price: "$0.005" },
+  "GET /api/v1/macro":        { price: "$0.005" },
+  "GET /api/v1/news":         { price: "$0.005" },
+  "GET /api/v1/arxiv":        { price: "$0.005" },
+  "GET /api/v1/onchain":      { price: "$0.005" },
   // ── Tier 2 — $5.00 USDC ────────────────────────────────────────────────────
-  "POST /api/v2/intel":           { accepts: { scheme: "exact", price: "$5.00", network: NETWORK, payTo: WALLET }, description: "B2B intent Golden Lead packets" },
-  "GET /api/v2/github-velocity":  { accepts: { scheme: "exact", price: "$5.00", network: NETWORK, payTo: WALLET }, description: "GitHub AI pivot tracker" },
-  "POST /api/v2/job-pivots":      { accepts: { scheme: "exact", price: "$5.00", network: NETWORK, payTo: WALLET }, description: "Job board AI pivot signals" },
-  "GET /api/v2/sec-filings":      { accepts: { scheme: "exact", price: "$5.00", network: NETWORK, payTo: WALLET }, description: "SEC 8-K AI filings intelligence" },
-  "GET /api/v2/patents":          { accepts: { scheme: "exact", price: "$5.00", network: NETWORK, payTo: WALLET }, description: "AI patent intelligence — USPTO filings" },
-  "POST /api/v2/company-profile": { accepts: { scheme: "exact", price: "$5.00", network: NETWORK, payTo: WALLET }, description: "Full company intelligence dossier" },
+  "POST /api/v2/intel":           { price: "$5.00" },
+  "GET /api/v2/github-velocity":  { price: "$5.00" },
+  "POST /api/v2/job-pivots":      { price: "$5.00" },
+  "GET /api/v2/sec-filings":      { price: "$5.00" },
+  "GET /api/v2/patents":          { price: "$5.00" },
+  "POST /api/v2/company-profile": { price: "$5.00" },
 };
 
-// syncFacilitatorOnStart=false — manually initialize in app.listen
-app.use(paymentMiddleware(x402Routes, resourceServer, undefined, undefined, false));
+app.use(createPaymentMiddleware(paymentRoutes, WALLET));
 
 // ── Revenue tracking ──────────────────────────────────────────────────────────
 app.use("/api/v1", (req, res, next) => { stats.tier1++; stats.revenue += 0.005; next(); });
@@ -155,7 +135,7 @@ app.get("/health", (_req, res) => {
     tier1:     { requests: stats.tier1, rph: Math.round(stats.tier1 / hrs) },
     tier2:     { requests: stats.tier2, rph: Math.round(stats.tier2 / hrs) },
     revenue:   { usdc: stats.revenue.toFixed(3), usd: `$${stats.revenue.toFixed(2)}` },
-    wallet:    process.env.WALLET_ADDRESS,
+    wallet:    WALLET,
     network:   NETWORK_NAME,
     endpoints: { tier1: 8, tier2: 6, total: 14 },
     timestamp: new Date().toISOString(),
@@ -215,19 +195,9 @@ app.listen(PORT, async () => {
   console.log(`   MCP      : /mcp`);
   console.log(`   Card     : /.well-known/agent-card.json\n`);
 
-  if (!CDP_KEYS) {
-    console.warn(`[x402] TESTNET MODE — add CDP_API_KEY_ID + CDP_API_KEY_SECRET for Base Mainnet`);
-    console.warn(`[x402] Free keys: https://portal.cdp.coinbase.com/\n`);
-  }
-
-  // Initialize x402 facilitator — fetches supported payment kinds
-  try {
-    await resourceServer.initialize();
-    console.log(`[x402] Facilitator ready — ${NETWORK_NAME}`);
-    if (CDP_KEYS) console.log(`[x402] Mainnet USDC payments active`);
-  } catch (e) {
-    console.error(`[x402] Facilitator init failed: ${e.message}`);
-  }
+  console.log(`[payment] Base Mainnet USDC — real money active`);
+  console.log(`[payment] Wallet: ${WALLET}`);
+  console.log(`[payment] RPC: https://mainnet.base.org\n`);
 
   // ACP seller runtime
   if (process.env.AGENT_WALLET_PRIVATE_KEY) {
