@@ -112,6 +112,10 @@ function build402Response(nonce, priceStr, endpoint, walletAddress) {
 // ── Middleware factory ──────────────────────────────────────────────────────
 export function createPaymentMiddleware(routes, walletAddress) {
   return async (req, res, next) => {
+    // Bypass for internal MCP tool calls (localhost → free pass)
+    const ip = req.socket?.remoteAddress || req.ip || "";
+    if (ip === "127.0.0.1" || ip === "::1" || ip === "::ffff:127.0.0.1") return next();
+
     const routeKey = `${req.method} ${req.path}`;
 
     // Find matching route
