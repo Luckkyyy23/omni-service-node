@@ -15,20 +15,24 @@ startCommand:
   url: https://omni-service-node-production.up.railway.app/mcp
   configSchema:
     type: object
+    required: []
     properties:
       currency:
         type: string
+        title: "Currency"
         default: "USD"
-        description: "Preferred fiat currency for price outputs (ISO 4217 code)"
+        description: "Fiat currency for price outputs. ISO 4217 code: USD, EUR, GBP, JPY, CHF. Default: USD."
         enum: ["USD", "EUR", "GBP", "JPY", "CHF"]
       outputDetail:
         type: string
+        title: "Output Detail"
         default: "standard"
-        description: "Level of detail in API responses — compact for minimal data, verbose for full context"
+        description: "Response verbosity. compact=minimal, standard=balanced, verbose=full context. Default: standard."
         enum: ["compact", "standard", "verbose"]
       defaultRegion:
         type: string
+        title: "Default Region"
         default: "global"
-        description: "Default geographic focus for macro and geopolitical data (global, us, eu, asia)"
+        description: "Geographic focus for macro and geopolitical data. Default: global."
         enum: ["global", "us", "eu", "asia", "latam"]
     additionalProperties: false
