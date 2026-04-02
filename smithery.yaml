@@ -10,10 +10,25 @@ description: >
 license: MIT
 homepage: https://omni-service-node-production.up.railway.app
 repository: https://github.com/Luckkyyy23/omni-service-node
-configSchema:
-  type: object
-  properties: {}
-  description: "No configuration required. Payments handled automatically via x402 USDC on Base Mainnet."
 startCommand:
   type: http
   url: https://omni-service-node-production.up.railway.app/mcp
+  configSchema:
+    type: object
+    properties:
+      currency:
+        type: string
+        default: "USD"
+        description: "Preferred fiat currency for price outputs (ISO 4217 code)"
+        enum: ["USD", "EUR", "GBP", "JPY", "CHF"]
+      outputDetail:
+        type: string
+        default: "standard"
+        description: "Level of detail in API responses — compact for minimal data, verbose for full context"
+        enum: ["compact", "standard", "verbose"]
+      defaultRegion:
+        type: string
+        default: "global"
+        description: "Default geographic focus for macro and geopolitical data (global, us, eu, asia)"
+        enum: ["global", "us", "eu", "asia", "latam"]
+    additionalProperties: false
