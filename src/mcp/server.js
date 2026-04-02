@@ -23,7 +23,7 @@ function registerTools(server) {
   // ── TIER 1 — $0.005/call ─────────────────────────────────────────────────────
 
   server.tool(
-    "check_ai_compliance",
+    "checkAiCompliance",
     "EU AI Act 2024/1689 risk classification (prohibited/high-risk/limited/minimal) with legal obligations, deadlines, and CISA alerts. $0.005.",
     {
       company:     z.string().optional().describe("Company name to classify under EU AI Act"),
@@ -38,7 +38,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "screen_sanctions",
+    "screenSanctions",
     "Screen entities against OFAC, EU, UN, UK sanctions lists. Returns match probability and risk level. $0.005.",
     {
       name:    z.string().describe("Entity name, company, vessel, or wallet address to screen"),
@@ -50,7 +50,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_market_sentiment",
+    "getMarketSentiment",
     "Fear & Greed index, CoinGecko global market data, asset prices, trending tokens, RISK_ON/RISK_OFF signal. $0.005.",
     {
       assets: z.string().default("BTC,ETH,VIRTUAL,GOLD,SOL").describe("Comma-separated list of asset tickers to include (e.g. BTC,ETH,GOLD)"),
@@ -60,7 +60,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_trading_signal",
+    "getTradingSignal",
     "BUY/SELL/HOLD signal for Gold, BTC, FX. Returns entry, stop loss, take profit, R:R, RSI, EMA, ATR, confidence. $0.005.",
     {
       symbol:    z.string().default("XAUUSD").describe("Trading instrument symbol (e.g. XAUUSD, BTCUSD, EURUSD)"),
@@ -71,7 +71,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_macro_data",
+    "getMacroData",
     "US Fed rate, CPI, M2, unemployment, GDP, yield curve, G10 FX, rate environment signal. $0.005.",
     {
       countries: z.string().default("US,CN,EU,JP,GB").describe("Comma-separated ISO country codes to include macro data for"),
@@ -81,7 +81,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_ai_news",
+    "getAiNews",
     "Real-time AI/tech/market news from HackerNews, Reddit (r/ML, r/LocalLLaMA), NewsAPI. Scored articles and trending keywords. $0.005.",
     {
       category: z.enum(["ai","crypto","macro","all"]).default("ai").describe("News category filter: ai, crypto, macro, or all"),
@@ -93,7 +93,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_arxiv_research",
+    "getArxivResearch",
     "Latest AI/ML papers from ArXiv. Breakthrough detection, trending topics, top authors. Covers cs.AI, cs.LG, cs.CL, cs.CV. $0.005.",
     {
       category: z.enum(["ai","ml","nlp","cv","robotics","agents","all"]).default("all").describe("ArXiv subject category to filter by"),
@@ -106,7 +106,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_onchain_data",
+    "getOnchainData",
     "Bitcoin fees/mempool/hashrate, Ethereum gas oracle, DeFi TVL from 500+ protocols, top yield opportunities. $0.005.",
     {
       chain: z.enum(["all","btc","eth","defi"]).default("all").describe("Blockchain to query: all, btc (Bitcoin), eth (Ethereum), or defi (DeFi protocols)"),
@@ -116,7 +116,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_earnings",
+    "getEarnings",
     "Upcoming and recent earnings: EPS, revenue, beat/miss signals for US equities. $0.005.",
     {
       days:    z.number().int().default(7).describe("Window in days around today to search for earnings events (1-90)"),
@@ -127,7 +127,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_commodities",
+    "getCommodities",
     "Gold, silver, oil, wheat, corn, copper, natural gas — spot prices, trends, supply/demand signals. $0.005.",
     {
       commodities: z.string().default("gold,silver,oil,wheat,copper").describe("Comma-separated commodity names to fetch (gold, silver, oil, wheat, corn, copper, natgas)"),
@@ -137,7 +137,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_economic_calendar",
+    "getEconomicCalendar",
     "High-impact economic events: CPI, NFP, FOMC, GDP releases with expected vs prior values. $0.005.",
     {
       days:      z.number().int().default(7).describe("Number of days ahead (and behind) to include in the calendar (1-30)"),
@@ -148,7 +148,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_insider_trades",
+    "getInsiderTrades",
     "SEC Form 4 insider buys/sells — bullish/bearish signal for any US stock. $0.005.",
     {
       symbol: z.string().default("").describe("Stock ticker to filter insider trades for (e.g. NVDA); leave empty for market-wide view"),
@@ -159,7 +159,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_options_flow",
+    "getOptionsFlow",
     "Unusual options activity — volume/OI spikes on SPY, QQQ, NVDA, TSLA. Dark pool + sweep detection. $0.005.",
     {
       symbol:     z.string().default("SPY").describe("Underlying stock ticker to scan for unusual options activity"),
@@ -170,7 +170,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_market_movers",
+    "getMarketMovers",
     "Top gainers, losers, most active stocks with volume surge signals. $0.005.",
     {
       type:  z.enum(["gainers","losers","active","all"]).default("all").describe("Which mover category to return: gainers, losers, active (by volume), or all"),
@@ -181,7 +181,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_ipo_calendar",
+    "getIpoCalendar",
     "Upcoming and recent IPOs — size, pricing, market cap, sector. $0.005.",
     {
       days: z.number().int().default(30).describe("Window in days (past and future) to include IPO events (1-90)"),
@@ -191,7 +191,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_analyst_ratings",
+    "getAnalystRatings",
     "Upgrades/downgrades on AI/tech stocks — firm name, rating change, price target. $0.005.",
     {
       symbol: z.string().default("").describe("Stock ticker to filter analyst ratings for (e.g. NVDA); empty returns market-wide"),
@@ -202,7 +202,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_fear_index",
+    "getFearIndex",
     "VIX + Fear & Greed index — market risk temperature and historical context. $0.005.",
     {
       format: z.enum(["summary","full"]).default("summary").describe("Output format: summary for key metrics only, full for historical context and trend analysis"),
@@ -212,7 +212,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_fx_rates",
+    "getFxRates",
     "Live FX rates — major pairs, minors, crypto vs USD, DXY. $0.005.",
     {
       pairs: z.string().default("EURUSD,GBPUSD,USDJPY,AUDUSD,DXY").describe("Comma-separated FX pairs or indices to fetch (e.g. EURUSD,GBPUSD,DXY)"),
@@ -222,7 +222,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_nft_market",
+    "getNftMarket",
     "NFT market conditions — floor prices, volume, blue chip sentiment, wash trade detection. $0.005.",
     {
       collections: z.string().default("cryptopunks,bored-ape-yacht-club,azuki").describe("Comma-separated OpenSea collection slugs to analyse (e.g. cryptopunks,azuki)"),
