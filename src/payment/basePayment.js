@@ -84,27 +84,26 @@ async function verifyUsdcTransfer(txHash, expectedAmountUnits, recipientAddress)
   }
 }
 
-// Build the 402 response body
+// Build the 402 response body — standard x402 v1 format (compatible with @x402/fetch, x402scan)
 function build402Response(nonce, priceStr, endpoint, walletAddress) {
   const amountUnits = priceToUnits(priceStr);
   return {
-    x402Version: 2,
+    x402Version: 1,
     error: "Payment Required",
     accepts: [{
-      scheme:    "direct-transfer",
-      network:   "eip155:8453",
-      token:     "USDC",
-      contract:  USDC_CONTRACT,
-      payTo:     walletAddress,
+      scheme:            "exact",
+      network:           "base",
+      asset:             USDC_CONTRACT,
+      payTo:             walletAddress,
       maxAmountRequired: String(amountUnits),
-      price:     priceStr,
-      nonce,
-      instructions: [
-        `1. Send exactly ${priceStr} USDC (${amountUnits} units) to ${walletAddress} on Base Mainnet (chain ID 8453)`,
-        `2. USDC contract: ${USDC_CONTRACT}`,
-        `3. Resend your request with header: X-PAYMENT: <txHash>`,
-        `4. Payment window: 10 minutes`,
-      ].join(" | "),
+      maxTimeoutSeconds: 600,
+      extra: {
+        name:     "USDC",
+        decimals: USDC_DECIMALS,
+        version:  "2",
+        nonce,
+        description: `Send ${priceStr} USDC to ${walletAddress} on Base Mainnet. Resend with X-PAYMENT: <txHash>.`,
+      },
     }],
   };
 }
@@ -118,8 +117,8 @@ export function createPaymentMiddleware(routes, walletAddress) {
 
     const routeKey = `${req.method} ${req.path}`;
 
-    // Find matching route
-    const route = routes[routeKey];
+    // Find matching route — also check path-only (any method) for discovery scanners
+    const route = routes[routeKey] || routes[`GET ${req.path}`] || routes[`POST ${req.path}`];
     if (!route) return next();
 
     const priceStr = route.price; // e.g. "$0.005"

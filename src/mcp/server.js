@@ -232,7 +232,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_defi_yields",
+    "getDefiYields",
     "DeFi yield opportunities across Aave, Compound, Curve, Yearn and 100+ protocols. $0.005.",
     {
       chain:   z.string().default("all").describe("Blockchain to filter yield opportunities by (all, ethereum, arbitrum, polygon, base)"),
@@ -243,7 +243,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_token_unlocks",
+    "getTokenUnlocks",
     "Upcoming token vesting unlocks — supply pressure signals for crypto assets. $0.005.",
     {
       days: z.number().int().default(30).describe("Number of days ahead to scan for token unlock events (1-180)"),
@@ -253,7 +253,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_crypto_derivatives",
+    "getCryptoDerivatives",
     "Crypto futures + options — funding rates, open interest, liquidations, basis. $0.005.",
     {
       symbol:   z.string().default("BTC").describe("Crypto asset ticker to query derivatives data for (e.g. BTC, ETH, SOL)"),
@@ -264,7 +264,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_stablecoins",
+    "getStablecoins",
     "Stablecoin health monitor — peg deviation, supply changes, depeg risk scores for USDT/USDC/DAI/FRAX. $0.005.",
     {
       tokens: z.string().default("USDT,USDC,DAI,FRAX").describe("Comma-separated stablecoin symbols to monitor (e.g. USDT,USDC,DAI,FRAX)"),
@@ -274,7 +274,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_virtuals_protocol",
+    "getVirtualsProtocol",
     "Virtuals Protocol AI agents — prices, market cap, volume, top agents by activity. $0.005.",
     {
       limit: z.number().int().default(20).describe("Number of top Virtuals Protocol agents to return (1-100)"),
@@ -284,7 +284,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_ai_tokens",
+    "getAiTokens",
     "AI/ML crypto tokens sector performance — NEAR, FET, AGIX, RNDR, WLD, TAO. $0.005.",
     {
       limit: z.number().int().default(30).describe("Number of AI-sector tokens to return, ranked by market cap (1-100)"),
@@ -294,7 +294,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_bittensor",
+    "getBittensor",
     "Bittensor TAO subnet activity — validator rewards, top subnets, network health. $0.005.",
     {
       limit: z.number().int().default(20).describe("Number of top subnets to return ranked by validator rewards (1-64)"),
@@ -304,7 +304,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_model_prices",
+    "getModelPrices",
     "AI model pricing comparison — cost per 1M tokens across OpenAI, Anthropic, Google, Mistral, Groq. $0.005.",
     {
       providers: z.string().default("openai,anthropic,google,mistral,groq").describe("Comma-separated AI providers to include in price comparison (e.g. openai,anthropic,google)"),
@@ -314,7 +314,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_space_weather",
+    "getSpaceWeather",
     "NOAA KP index, solar flux, X-ray flares, geomagnetic storm alerts. Impacts HF radio, GPS, satellites. $0.005.",
     {
       alerts: z.boolean().default(true).describe("Whether to include active NOAA geomagnetic storm and solar radiation alerts in the response"),
@@ -324,7 +324,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_earthquake_monitor",
+    "getEarthquakeMonitor",
     "USGS significant earthquakes (M4+) — magnitude, region, depth, tsunami risk. $0.005.",
     {
       days:         z.number().int().default(7).describe("Number of days back to search for seismic events (1-30)"),
@@ -335,7 +335,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_energy_prices",
+    "getEnergyPrices",
     "Global energy prices — crude oil (WTI/Brent), natural gas, LNG, coal, electricity spot. $0.005.",
     {
       commodities: z.string().default("wti,brent,natgas,lng,coal").describe("Comma-separated energy commodities to fetch (wti, brent, natgas, lng, coal, electricity)"),
@@ -345,7 +345,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_shipping_rates",
+    "getShippingRates",
     "Global shipping rates — Baltic Dry Index, container rates, port congestion signals. $0.005.",
     {
       routes: z.string().default("asia-europe,transpacific,transatlantic").describe("Comma-separated shipping routes to include (e.g. asia-europe, transpacific, transatlantic)"),
@@ -355,7 +355,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_semiconductor_supply",
+    "getSemiconductorSupply",
     "Semiconductor supply chain intel — TSMC utilization, chip lead times, shortage signals by node. $0.005.",
     {
       nodes: z.string().default("3nm,5nm,7nm,28nm").describe("Comma-separated process nodes to analyse supply chain for (e.g. 3nm, 5nm, 7nm, 28nm)"),
@@ -365,7 +365,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_merger_activity",
+    "getMergerActivity",
     "M&A activity — announced deals, rumored targets, sector consolidation signals. $0.005.",
     {
       sector: z.string().default("tech").describe("Industry sector to focus M&A intelligence on (e.g. tech, finance, healthcare, energy)"),
@@ -376,7 +376,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_private_equity",
+    "getPrivateEquity",
     "Private equity and VC deal flow — funding rounds, exits, dry powder, sector focus. $0.005.",
     {
       sector: z.string().default("ai").describe("Industry sector to filter PE/VC deals for (e.g. ai, fintech, biotech, crypto)"),
@@ -387,7 +387,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_real_estate_market",
+    "getRealEstateMarket",
     "US real estate market data — home prices, mortgage rates, inventory, regional trends. $0.005.",
     {
       region: z.string().default("national").describe("US region or metro area to get real estate data for (e.g. national, new-york, los-angeles, miami)"),
@@ -397,7 +397,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_github_trending",
+    "getGithubTrending",
     "GitHub trending repositories — by language, topic, stars today/week. AI/ML repos highlighted. $0.005.",
     {
       language: z.string().default("").describe("Programming language to filter by (e.g. python, typescript, rust); leave empty for all"),
@@ -411,7 +411,7 @@ function registerTools(server) {
   // ── TIER 2 — $5–$25/call ─────────────────────────────────────────────────────
 
   server.tool(
-    "get_b2b_intel",
+    "getB2bIntel",
     "Golden Lead packets for B2B sales agents. SEC + GitHub + jobs → scored leads (HOT/WARM/COLD) with AI pivot signals. $5.",
     {
       companies: z.array(z.string()).min(1).max(10).default(["microsoft","salesforce","oracle"]).describe("List of company names or domains to generate B2B intelligence for (1-10 companies)"),
@@ -422,7 +422,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_github_velocity",
+    "getGithubVelocity",
     "Company GitHub AI pivot score — new AI repos, topic changes, star velocity, commit frequency. $5.",
     {
       org:  z.string().describe("GitHub organisation slug to analyse for AI activity (e.g. openai, anthropic, microsoft)"),
@@ -433,7 +433,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_job_pivots",
+    "getJobPivots",
     "Companies hiring agentic AI roles — Greenhouse, Lever, HN Who's Hiring, Remotive. Buyer intent signal. $5.",
     {
       roles:     z.array(z.string()).default(["AI Engineer","ML Engineer","Agentic Systems"]).describe("List of job titles or role keywords to search for as AI hiring signals"),
@@ -445,7 +445,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_sec_filings",
+    "getSecFilings",
     "Real-time SEC 8-K/10-K/10-Q filings mentioning AI/autonomous operations. AI-relevance scored. $5.",
     {
       query:    z.string().default("agentic AI autonomous").describe("Keywords to search within SEC filing text (e.g. 'agentic AI autonomous')"),
@@ -458,7 +458,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_ai_patents",
+    "getAiPatents",
     "USPTO AI patent filings — who is building what in neural networks, autonomous agents, LLMs. $5.",
     {
       query:     z.string().default("artificial intelligence agentic").describe("Patent search keywords covering the technical domain (e.g. 'autonomous agents LLM')"),
@@ -470,7 +470,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_company_profile",
+    "getCompanyProfile",
     "Full company dossier: SEC filings + GitHub velocity + hiring + patents + HN sentiment → HOT/WARM/COLD lead score. $5.",
     {
       company: z.string().describe("Company name or domain to generate the full intelligence dossier for"),
@@ -483,7 +483,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_whale_tracker",
+    "getWhaleTracker",
     "On-chain whale wallet movements — large BTC/ETH transfers, exchange inflows/outflows, smart money signals. $5.",
     {
       chain:        z.enum(["btc","eth","all"]).default("all").describe("Blockchain to monitor for large wallet movements: btc, eth, or all"),
@@ -494,7 +494,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_funding_rounds",
+    "getFundingRounds",
     "VC and PE funding rounds — amount, investors, valuation, sector. AI startup deals highlighted. $5.",
     {
       sector:     z.string().default("ai").describe("Industry sector to filter funding rounds for (e.g. ai, fintech, biotech, deeptech)"),
@@ -506,7 +506,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_competitor_intel",
+    "getCompetitorIntel",
     "Competitive intelligence dossier — product launches, pricing changes, hiring signals vs target company. $5.",
     {
       company:     z.string().describe("Primary company to build competitive intelligence around"),
@@ -518,7 +518,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_hedge_funds",
+    "getHedgeFunds",
     "Hedge fund 13F filings — top holdings, new positions, exits, sector rotation signals. $5.",
     {
       fund:    z.string().default("").describe("Hedge fund name to filter 13F filings for (e.g. 'Bridgewater'); empty returns top funds"),
@@ -530,7 +530,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_dao_governance",
+    "getDaoGovernance",
     "DAO governance activity — active proposals, voting power distribution, treasury size, sentiment. $5.",
     {
       protocol: z.string().default("").describe("Protocol name to filter DAO governance data for (e.g. uniswap, aave, compound); empty returns all"),
@@ -541,7 +541,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "get_geopolitical_crisis",
+    "getGeopoliticalCrisis",
     "GDELT real-time crisis monitoring — Iran/Israel/Trump/Russia. Crisis score, escalation risk, oil/gold/USD market impact, OFAC alerts, Reddit/HN viral signals. $25.",
     {
       regions:             z.string().default("middle-east,ukraine,taiwan").describe("Comma-separated geopolitical regions to monitor (e.g. middle-east, ukraine, taiwan, korea)"),
@@ -554,7 +554,7 @@ function registerTools(server) {
   // ── BUNDLES — $0.50–$500 ─────────────────────────────────────────────────────
 
   server.tool(
-    "run_bundle_starter",
+    "runBundleStarter",
     "AI Agent Starter Pack — compliance + sentiment + signals + macro + news in one call. $0.50.",
     {
       symbol: z.string().default("XAUUSD").describe("Primary trading symbol to generate signals for in the starter bundle (e.g. XAUUSD, BTCUSD)"),
@@ -566,7 +566,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_market_intel",
+    "runBundleMarketIntel",
     "Market Intelligence Pack — signals + onchain + macro + options flow + insider trades + earnings. $25.",
     {
       symbols: z.array(z.string()).default(["XAUUSD","BTCUSD","SPY"]).describe("List of trading symbols to include in the market intelligence bundle"),
@@ -577,7 +577,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_company_deep",
+    "runBundleCompanyDeep",
     "Company Deep Dive — profile + competitor intel + hedge funds + analyst ratings + filings. $50.",
     {
       company: z.string().describe("Company name to run the full deep-dive intelligence bundle on"),
@@ -589,7 +589,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_crypto_alpha",
+    "runBundleCryptoAlpha",
     "Crypto Alpha Pack — onchain + whale tracker + DeFi yields + AI tokens + derivatives + stablecoins. $25.",
     {
       chains: z.string().default("btc,eth").describe("Comma-separated blockchain networks to include in the crypto alpha bundle"),
@@ -600,7 +600,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_macro_global",
+    "runBundleMacroGlobal",
     "Global Macro Pack — macro + FX + interest rates + inflation + consumer + labor data. $50.",
     {
       countries: z.string().default("US,EU,JP,GB,CN").describe("Comma-separated ISO country codes to include in the global macro bundle"),
@@ -611,7 +611,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_ai_economy",
+    "runBundleAiEconomy",
     "AI Economy Intelligence — arxiv + github trending + jobs + model prices + AI tokens + regulatory. $100.",
     {
       focus: z.string().default("agentic ai autonomous").describe("Keywords describing the AI economy area to focus the bundle on (e.g. 'agentic ai autonomous')"),
@@ -622,7 +622,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_sovereign",
+    "runBundleSovereign",
     "Sovereign Intelligence — ALL endpoints combined: full macro + geopolitical + company + crypto + hedge funds. $500.",
     {
       regions:   z.string().default("all").describe("Geopolitical regions to include in the sovereign intelligence sweep (all, or comma-separated list)"),
@@ -634,7 +634,7 @@ function registerTools(server) {
   );
 
   server.tool(
-    "run_bundle_geopolitical",
+    "runBundleGeopolitical",
     "Geopolitical War Room — GDELT Iran/Israel/Trump monitoring + crisis scores + oil/gold/USD/defense market impact + OFAC alerts + Reddit/HN signals. $200.",
     {
       regions: z.string().default("middle-east,ukraine,taiwan").describe("Comma-separated geopolitical regions to cover in the war room bundle"),
@@ -679,9 +679,9 @@ function registerResources(server) {
         uri: "omni://pricing",
         mimeType: "application/json",
         text: JSON.stringify({
-          tier1:   { priceUSDC: 0.005, tools: 36, examples: ["get_trading_signal","get_macro_data","get_ai_news"] },
-          tier2:   { priceUSDC: "5–25", tools: 12, examples: ["get_b2b_intel","get_company_profile","get_geopolitical_crisis"] },
-          bundles: { priceUSDC: "0.50–500", tools: 8, examples: ["run_bundle_starter","run_bundle_sovereign"] },
+          tier1:   { priceUSDC: 0.005, tools: 36, examples: ["getTradingSignal","getMacroData","getAiNews"] },
+          tier2:   { priceUSDC: "5–25", tools: 12, examples: ["getB2bIntel","getCompanyProfile","getGeopoliticalCrisis"] },
+          bundles: { priceUSDC: "0.50–500", tools: 8, examples: ["runBundleStarter","runBundleSovereign"] },
           payment: { protocol: "x402", token: "USDC", network: "Base Mainnet", noSubscription: true },
         }, null, 2),
       }],
@@ -699,7 +699,7 @@ function registerPrompts(server) {
         role: "user",
         content: {
           type: "text",
-          text: "Omni Service Node is a pay-per-call data marketplace for AI agents. Call any tool directly — payment is handled automatically via x402 USDC on Base Mainnet. Tier 1 endpoints cost $0.005 each, Tier 2 cost $5–$25, and Bundles cost $0.50–$500. No API keys or subscriptions required. Start with get_trading_signal or get_market_sentiment for market data, get_macro_data for economics, get_geopolitical_crisis for geopolitical risk, or run_bundle_starter for a full overview.",
+          text: "Omni Service Node is a pay-per-call data marketplace for AI agents. Call any tool directly — payment is handled automatically via x402 USDC on Base Mainnet. Tier 1 endpoints cost $0.005 each, Tier 2 cost $5–$25, and Bundles cost $0.50–$500. No API keys or subscriptions required. Start with getTradingSignal or getMarketSentiment for market data, getMacroData for economics, getGeopoliticalCrisis for geopolitical risk, or runBundleStarter for a full overview.",
         },
       }],
     })
@@ -716,21 +716,21 @@ function registerPrompts(server) {
           type: "text",
           text: `Omni Service Node — 56 Endpoint Guide:
 
-MARKET SIGNALS ($0.005): get_trading_signal, get_market_sentiment, get_market_movers, get_fear_index, get_options_flow, get_insider_trades, get_analyst_ratings, get_earnings, get_ipo_calendar
+MARKET SIGNALS ($0.005): getTradingSignal, getMarketSentiment, getMarketMovers, getFearIndex, getOptionsFlow, getInsiderTrades, getAnalystRatings, getEarnings, getIpoCalendar
 
-MACRO & FX ($0.005): get_macro_data, get_fx_rates, get_economic_calendar, get_commodities, get_energy_prices
+MACRO & FX ($0.005): getMacroData, getFxRates, getEconomicCalendar, getCommodities, getEnergyPrices
 
-CRYPTO & DEFI ($0.005): get_onchain_data, get_defi_yields, get_stablecoins, get_crypto_derivatives, get_token_unlocks, get_nft_market, get_ai_tokens, get_virtuals_protocol, get_bittensor
+CRYPTO & DEFI ($0.005): getOnchainData, getDefiYields, getStablecoins, getCryptoDerivatives, getTokenUnlocks, getNftMarket, getAiTokens, getVirtualsProtocol, getBittensor
 
-INTELLIGENCE ($0.005): get_ai_news, get_arxiv_research, get_github_trending, get_model_prices, get_space_weather, get_earthquake_monitor, get_shipping_rates, get_semiconductor_supply
+INTELLIGENCE ($0.005): getAiNews, getArxivResearch, getGithubTrending, getModelPrices, getSpaceWeather, getEarthquakeMonitor, getShippingRates, getSemiconductorSupply
 
-MACRO RISKS ($0.005): get_merger_activity, get_private_equity, get_real_estate_market
+MACRO RISKS ($0.005): getMergerActivity, getPrivateEquity, getRealEstateMarket
 
-SANCTIONS & COMPLIANCE ($0.005): screen_sanctions, check_ai_compliance
+SANCTIONS & COMPLIANCE ($0.005): screenSanctions, checkAiCompliance
 
-TIER 2 DEEP INTEL ($5–$25): get_b2b_intel, get_github_velocity, get_job_pivots, get_sec_filings, get_ai_patents, get_company_profile, get_whale_tracker, get_funding_rounds, get_competitor_intel, get_hedge_funds, get_dao_governance, get_geopolitical_crisis
+TIER 2 DEEP INTEL ($5–$25): getB2bIntel, getGithubVelocity, getJobPivots, getSecFilings, getAiPatents, getCompanyProfile, getWhaleTracker, getFundingRounds, getCompetitorIntel, getHedgeFunds, getDaoGovernance, getGeopoliticalCrisis
 
-BUNDLES ($0.50–$500): run_bundle_starter, run_bundle_market_intel, run_bundle_company_deep, run_bundle_crypto_alpha, run_bundle_macro_global, run_bundle_ai_economy, run_bundle_sovereign, run_bundle_geopolitical`,
+BUNDLES ($0.50–$500): runBundleStarter, runBundleMarketIntel, runBundleCompanyDeep, runBundleCryptoAlpha, runBundleMacroGlobal, runBundleAiEconomy, runBundleSovereign, runBundleGeopolitical`,
         },
       }],
     })

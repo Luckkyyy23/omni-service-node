@@ -228,6 +228,38 @@ app.use("/mcp", createMcpRouter());
 // ── Static public files + discovery ──────────────────────────────────────────
 app.use(express.static(path.join(__dirname, "../public")));
 
+app.get("/", (_req, res) => {
+  res.json({ status: "ok", name: "omni-service-node", version: "1.0.0", endpoints: 56 });
+});
+
+// x402 discovery document — lets x402scan and autonomous agents discover all paid endpoints
+app.get("/.well-known/x402", (_req, res) => {
+  res.json({
+    version: 1,
+    resources: [
+      "GET /api/v1/compliance","POST /api/v1/sanctions","GET /api/v1/sentiment",
+      "GET /api/v1/signals","GET /api/v1/macro","GET /api/v1/news","GET /api/v1/arxiv",
+      "GET /api/v1/onchain","GET /api/v1/earnings","GET /api/v1/commodities",
+      "GET /api/v1/economic-calendar","GET /api/v1/insider-trades","GET /api/v1/options-flow",
+      "GET /api/v1/market-movers","GET /api/v1/ipo-calendar","GET /api/v1/analyst-ratings",
+      "GET /api/v1/fear-index","GET /api/v1/fx-rates","GET /api/v1/nft-market",
+      "GET /api/v1/defi-yields","GET /api/v1/token-unlocks","GET /api/v1/crypto-derivatives",
+      "GET /api/v1/stablecoins","GET /api/v1/virtuals-protocol","GET /api/v1/ai-tokens",
+      "GET /api/v1/bittensor","GET /api/v1/model-prices","GET /api/v1/space-weather",
+      "GET /api/v1/earthquake-monitor","GET /api/v1/energy-prices","GET /api/v1/shipping-rates",
+      "GET /api/v1/semiconductor-supply","GET /api/v1/merger-activity","GET /api/v1/private-equity",
+      "GET /api/v1/real-estate-market","GET /api/v1/github-trending",
+      "POST /api/v2/intel","GET /api/v2/github-velocity","POST /api/v2/job-pivots",
+      "GET /api/v2/sec-filings","GET /api/v2/patents","POST /api/v2/company-profile",
+      "GET /api/v2/whale-tracker","GET /api/v2/funding-rounds","POST /api/v2/competitor-intel",
+      "GET /api/v2/hedge-funds","GET /api/v2/dao-governance","GET /api/v2/geopolitical-crisis",
+      "POST /api/bundle/starter","POST /api/bundle/market-intel","POST /api/bundle/geopolitical",
+      "POST /api/bundle/crypto-alpha","POST /api/bundle/ai-economy",
+      "POST /api/bundle/company-deep","POST /api/bundle/sovereign","POST /api/bundle/macro-global",
+    ],
+  });
+});
+
 app.get("/health", (_req, res) => {
   const uptime = Math.round((Date.now() - stats.startedAt) / 1000);
   const hrs    = uptime / 3600 || 1;
