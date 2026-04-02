@@ -204,9 +204,11 @@ function registerTools(server) {
   server.tool(
     "get_fear_index",
     "VIX + Fear & Greed index — market risk temperature and historical context. $0.005.",
-    {},
+    {
+      format: z.enum(["summary","full"]).default("summary").describe("Output format: summary for key metrics only, full for historical context and trend analysis"),
+    },
     { ...READ_ONLY, title: "Get Fear Index" },
-    async () => call(`${BASE()}/api/v1/fear-index`)
+    async ({ format }) => call(`${BASE()}/api/v1/fear-index?format=${format}`)
   );
 
   server.tool(
@@ -264,9 +266,11 @@ function registerTools(server) {
   server.tool(
     "get_stablecoins",
     "Stablecoin health monitor — peg deviation, supply changes, depeg risk scores for USDT/USDC/DAI/FRAX. $0.005.",
-    {},
+    {
+      tokens: z.string().default("USDT,USDC,DAI,FRAX").describe("Comma-separated stablecoin symbols to monitor (e.g. USDT,USDC,DAI,FRAX)"),
+    },
     { ...READ_ONLY, title: "Get Stablecoins" },
-    async () => call(`${BASE()}/api/v1/stablecoins`)
+    async ({ tokens }) => call(`${BASE()}/api/v1/stablecoins?tokens=${encodeURIComponent(tokens)}`)
   );
 
   server.tool(
@@ -292,25 +296,31 @@ function registerTools(server) {
   server.tool(
     "get_bittensor",
     "Bittensor TAO subnet activity — validator rewards, top subnets, network health. $0.005.",
-    {},
+    {
+      limit: z.number().int().default(20).describe("Number of top subnets to return ranked by validator rewards (1-64)"),
+    },
     { ...READ_ONLY, title: "Get Bittensor" },
-    async () => call(`${BASE()}/api/v1/bittensor`)
+    async ({ limit }) => call(`${BASE()}/api/v1/bittensor?limit=${limit}`)
   );
 
   server.tool(
     "get_model_prices",
     "AI model pricing comparison — cost per 1M tokens across OpenAI, Anthropic, Google, Mistral, Groq. $0.005.",
-    {},
+    {
+      providers: z.string().default("openai,anthropic,google,mistral,groq").describe("Comma-separated AI providers to include in price comparison (e.g. openai,anthropic,google)"),
+    },
     { ...READ_ONLY, title: "Get Model Prices" },
-    async () => call(`${BASE()}/api/v1/model-prices`)
+    async ({ providers }) => call(`${BASE()}/api/v1/model-prices?providers=${encodeURIComponent(providers)}`)
   );
 
   server.tool(
     "get_space_weather",
     "NOAA KP index, solar flux, X-ray flares, geomagnetic storm alerts. Impacts HF radio, GPS, satellites. $0.005.",
-    {},
+    {
+      alerts: z.boolean().default(true).describe("Whether to include active NOAA geomagnetic storm and solar radiation alerts in the response"),
+    },
     { ...READ_ONLY, title: "Get Space Weather" },
-    async () => call(`${BASE()}/api/v1/space-weather`)
+    async ({ alerts }) => call(`${BASE()}/api/v1/space-weather?alerts=${alerts}`)
   );
 
   server.tool(
@@ -327,25 +337,31 @@ function registerTools(server) {
   server.tool(
     "get_energy_prices",
     "Global energy prices — crude oil (WTI/Brent), natural gas, LNG, coal, electricity spot. $0.005.",
-    {},
+    {
+      commodities: z.string().default("wti,brent,natgas,lng,coal").describe("Comma-separated energy commodities to fetch (wti, brent, natgas, lng, coal, electricity)"),
+    },
     { ...READ_ONLY, title: "Get Energy Prices" },
-    async () => call(`${BASE()}/api/v1/energy-prices`)
+    async ({ commodities }) => call(`${BASE()}/api/v1/energy-prices?commodities=${encodeURIComponent(commodities)}`)
   );
 
   server.tool(
     "get_shipping_rates",
     "Global shipping rates — Baltic Dry Index, container rates, port congestion signals. $0.005.",
-    {},
+    {
+      routes: z.string().default("asia-europe,transpacific,transatlantic").describe("Comma-separated shipping routes to include (e.g. asia-europe, transpacific, transatlantic)"),
+    },
     { ...READ_ONLY, title: "Get Shipping Rates" },
-    async () => call(`${BASE()}/api/v1/shipping-rates`)
+    async ({ routes }) => call(`${BASE()}/api/v1/shipping-rates?routes=${encodeURIComponent(routes)}`)
   );
 
   server.tool(
     "get_semiconductor_supply",
     "Semiconductor supply chain intel — TSMC utilization, chip lead times, shortage signals by node. $0.005.",
-    {},
+    {
+      nodes: z.string().default("3nm,5nm,7nm,28nm").describe("Comma-separated process nodes to analyse supply chain for (e.g. 3nm, 5nm, 7nm, 28nm)"),
+    },
     { ...READ_ONLY, title: "Get Semiconductor Supply" },
-    async () => call(`${BASE()}/api/v1/semiconductor-supply`)
+    async ({ nodes }) => call(`${BASE()}/api/v1/semiconductor-supply?nodes=${encodeURIComponent(nodes)}`)
   );
 
   server.tool(
