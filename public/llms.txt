@@ -1,176 +1,92 @@
-# Omni Service Node v2.0
+# Omni Service Node v3.1
 
-> The petrol station for autonomous AI agents. 14 pay-per-call endpoints covering every intelligence category. x402 USDC on Base — no accounts, no subscriptions, no rate limits.
+> The petrol station for autonomous AI agents. 56 pay-per-call endpoints. Pure USDC on Base Mainnet — no accounts, no subscriptions, no rate limits.
 
-## Payment Protocol
+## Payment
 
-x402 micropayments via USDC on Base network.
-Wallet: `0x2DFe3B1C304DAd9F1b41D780ea81fCd137d810D8`
-
-How it works:
-1. Make HTTP request to any `/api/v1/*` or `/api/v2/*` endpoint
-2. Server responds `402 Payment Required` with encoded payment requirements
-3. Sign the payment with your Base wallet (EIP-3009 authorization)
-4. Resend request with `X-PAYMENT` header containing signed authorization
-5. Receive data (~200ms total round-trip)
-
-Compatible buyer libraries: `@x402/fetch`, `@x402/axios`, `@coinbase/x402`
+x402 micropayments. Wallet: `0x2DFe3B1C304DAd9F1b41D780ea81fCd137d810D8`
+USDC on Base (chain 8453). Libraries: `@x402/fetch`, `@coinbase/x402`
 
 ---
 
-## Tier 1 — Fuel ($0.005 USDC/call)
+## Tier 1 — $0.005 USDC/call (36 endpoints)
 
-High-frequency, low-cost signals for agents that need constant data.
-
-### EU AI Act Compliance
-`GET /api/v1/compliance`
-Classify any AI system or company against EU Regulation 2024/1689 risk tiers.
-Returns: prohibited/high-risk/limited-risk/minimal-risk classification, legal obligations, enforcement deadlines, CISA vulnerability alerts, AI incident history.
-Params: `company` (string), `system` (string), `description` (string)
-Example: `/api/v1/compliance?company=OpenAI&system=chatbot`
-
-### Global Sanctions Screening
-`POST /api/v1/sanctions`
-Screen any entity against OFAC, EU, UN, and UK sanctions lists.
-Returns: match probability, risk level, matched records with source citations.
-Body: `{"name": "Entity Name", "country": "RU"}`
-
-### Crypto & AI Market Sentiment
-`GET /api/v1/sentiment`
-Real-time market sentiment combining fear/greed index with live asset prices.
-Returns: Alternative.me Fear & Greed Index, CoinGecko global market data, asset prices, trending tokens, RISK_ON/RISK_OFF signal.
-Params: `assets` (comma-separated: BTC,ETH,VIRTUAL,GOLD,SOL,DOGE,AVAX)
-Example: `/api/v1/sentiment?assets=BTC,VIRTUAL,GOLD`
-
-### Directional Market Signals
-`GET /api/v1/signals`
-Actionable trading signal with full technical analysis.
-Returns: BUY/SELL/HOLD direction, entry price, stop loss, take profit, R:R ratio, RSI, EMA, ATR, confidence score 0-1.
-Params: `symbol` (XAUUSD|BTCUSD|EURUSD|GBPUSD|ETHUSD|DXY|USDJPY), `tf` (1m|5m|15m|1h|4h|1d)
-Example: `/api/v1/signals?symbol=XAUUSD&tf=1h`
-
-### Global Macro Economic Intelligence
-`GET /api/v1/macro`
-Comprehensive macro data for informed trading and investment decisions.
-Returns: US Fed funds rate, CPI inflation, M2 money supply, unemployment, GDP, yield curve shape, G10 FX rates, rate environment signal (RESTRICTIVE/NEUTRAL/ACCOMMODATIVE).
-Params: `countries` (comma-separated: US,CN,EU,JP,GB)
-Example: `/api/v1/macro?countries=US,CN,EU`
-
-### Real-Time AI & Market News
-`GET /api/v1/news`
-Aggregated news from HackerNews, Reddit (r/MachineLearning, r/LocalLLaMA, r/artificial), and NewsAPI.
-Returns: scored articles sorted by relevance, trending keywords, overall signal strength.
-Params: `category` (ai|crypto|macro|all), `hours` (1-168), `limit` (1-100)
-Example: `/api/v1/news?category=ai&hours=24&limit=30`
-
-### ArXiv AI Research Papers
-`GET /api/v1/arxiv`
-Latest AI/ML research papers with impact scoring and breakthrough detection.
-Returns: papers sorted by impact score, breakthrough papers flagged, trending topics, top author velocity. Covers cs.AI, cs.LG, cs.CL, cs.CV, cs.RO, cs.MA.
-Params: `category` (ai|ml|nlp|cv|robotics|agents|all), `query` (keyword filter), `days` (1-30), `limit` (1-50)
-Example: `/api/v1/arxiv?category=agents&days=3&query=agentic`
-
-### Blockchain & DeFi On-Chain Data
-`GET /api/v1/onchain`
-Real-time blockchain intelligence from public APIs.
-Returns: Bitcoin (block height, fees, mempool, hashrate, difficulty), Ethereum (gas oracle, base fee), DeFi (TVL from 500+ protocols, top yield opportunities).
-Params: `chain` (all|btc|eth|defi)
-Example: `/api/v1/onchain?chain=all`
+GET /api/v1/compliance — EU AI Act risk classification (prohibited/high-risk/limited/minimal)
+POST /api/v1/sanctions — OFAC/EU/UN/UK sanctions screening
+GET /api/v1/sentiment — Fear/Greed index, CoinGecko, RISK_ON/RISK_OFF signal
+GET /api/v1/signals — BUY/SELL/HOLD with entry/stop/target for Gold, BTC, FX
+GET /api/v1/macro — Fed rate, CPI, M2, GDP, yield curve, G10 FX
+GET /api/v1/news — HackerNews + Reddit + NewsAPI scored articles
+GET /api/v1/arxiv — Latest AI/ML/LLM papers with impact scoring
+GET /api/v1/onchain — BTC/ETH/DeFi on-chain data, TVL, top yields
+GET /api/v1/earnings — Upcoming + recent earnings, EPS, beat/miss
+GET /api/v1/commodities — Gold, silver, oil, wheat, corn, copper
+GET /api/v1/economic-calendar — CPI, NFP, FOMC, GDP releases
+GET /api/v1/insider-trades — SEC Form 4 insider buys/sells
+GET /api/v1/options-flow — Unusual options activity on SPY/QQQ/NVDA
+GET /api/v1/market-movers — Top gainers, losers, most active
+GET /api/v1/ipo-calendar — Upcoming + recent IPOs
+GET /api/v1/analyst-ratings — Upgrades/downgrades on AI/tech stocks
+GET /api/v1/fear-index — VIX + Fear & Greed index
+GET /api/v1/fx-rates — Live FX rates: major, minor, crypto
+GET /api/v1/nft-market — Floor prices, volume, NFT sentiment
+GET /api/v1/defi-yields — Aave, Compound, Curve, Yearn + 100 protocols
+GET /api/v1/token-unlocks — Upcoming vesting unlocks, supply pressure
+GET /api/v1/crypto-derivatives — Funding rates, open interest, liquidations
+GET /api/v1/stablecoins — Peg deviation, depeg risk for USDT/USDC/DAI/FRAX
+GET /api/v1/virtuals-protocol — Virtuals Protocol AI agents by price/volume
+GET /api/v1/ai-tokens — NEAR, FET, AGIX, RNDR, WLD, TAO sector data
+GET /api/v1/bittensor — TAO subnets, validator rewards, network health
+GET /api/v1/model-prices — Cost per 1M tokens: OpenAI/Anthropic/Google/Groq
+GET /api/v1/space-weather — NOAA KP index, solar flux, geomagnetic alerts
+GET /api/v1/earthquake-monitor — USGS earthquakes by magnitude/region
+GET /api/v1/energy-prices — Oil, gas, electricity, renewables
+GET /api/v1/shipping-rates — Baltic Dry Index, container rates
+GET /api/v1/semiconductor-supply — Chip supply/demand, TSMC/NVIDIA signals
+GET /api/v1/merger-activity — M&A deals, premiums, strategic signals
+GET /api/v1/private-equity — PE fund activity, deal flow, sector focus
+GET /api/v1/real-estate-market — Housing prices, mortgage rates, inventory
+GET /api/v1/github-trending — Trending repos by language, AI/ML detection
 
 ---
 
-## Tier 2 — Premium ($5.00 USDC/call)
+## Tier 2 — $5–$25 USDC/call (12 endpoints)
 
-Deep intelligence packets for well-funded sales, research, and investment agents.
-
-### B2B Golden Lead Packets
-`POST /api/v2/intel`
-Aggregated company intelligence for B2B sales agents.
-Returns: companies scored HOT/WARM/COLD with AI pivot signals, outreach angles, SEC activity, GitHub velocity, hiring signals.
-Body: `{"companies": ["Microsoft", "Salesforce", "Oracle"]}`
-
-### GitHub AI Pivot Tracker
-`GET /api/v2/github-velocity`
-Analyze any GitHub organization for AI adoption signals.
-Returns: AI repo count, new AI topics detected, star velocity, commit frequency, overall AI pivot score, buyer signal strength.
-Params: `org` (GitHub org slug), `days` (1-90)
-Example: `/api/v2/github-velocity?org=salesforce&days=30`
-
-### AI Hiring Signal Intelligence
-`POST /api/v2/job-pivots`
-Detect companies actively hiring AI talent — strongest buyer intent signal.
-Returns: ranked company list with role details, AI hiring velocity, signal strength. Sources: Greenhouse, Lever, HackerNews "Who is Hiring", Remotive.
-Body: `{"roles": ["AI Engineer", "ML Engineer", "Agentic Systems"], "companies": []}`
-
-### SEC AI Filings Intelligence
-`GET /api/v2/sec-filings`
-Real-time SEC EDGAR 8-K/10-K filings from public companies mentioning AI.
-Returns: filings scored by AI relevance, company names + tickers, direct EDGAR links, filing summaries.
-Params: `query` (keywords), `days` (1-30), `forms` (8-K|10-K|10-Q), `minScore` (0-100)
-Example: `/api/v2/sec-filings?query=agentic+AI+autonomous&days=7&forms=8-K`
-
-### USPTO AI Patent Intelligence
-`GET /api/v2/patents`
-Track AI patent filings from Fortune 500 and startups via USPTO PatentsView full database.
-Returns: patents scored by AI relevance, top assignees ranked by filing volume, IPC classification codes.
-Params: `query` (patent keywords), `companies` (comma-separated filter, optional), `days` (1-365)
-Example: `/api/v2/patents?query=autonomous+agent+LLM&days=90`
-
-### Full Company Intelligence Dossier
-`POST /api/v2/company-profile`
-The most comprehensive company intelligence packet available.
-Aggregates: SEC regulatory disclosures + GitHub engineering velocity + hiring signals + USPTO patent activity + HackerNews developer sentiment.
-Returns: lead score 0-100, HOT/WARM/COLD tier, outreach angle, full intelligence breakdown per source.
-Body: `{"company": "Salesforce", "github": "salesforce", "days": 30}`
+POST /api/v2/intel — B2B Golden Lead packets (HOT/WARM/COLD scored) — $5
+GET /api/v2/github-velocity — Fortune 500 GitHub AI pivot tracker — $5
+POST /api/v2/job-pivots — Companies hiring AI/agentic roles — $5
+GET /api/v2/sec-filings — Real-time 8-K/10-K AI mentions — $5
+GET /api/v2/patents — USPTO AI patent filings tracker — $5
+POST /api/v2/company-profile — Full company dossier (SEC+GitHub+Jobs+Patents) — $5
+GET /api/v2/whale-tracker — Crypto whale movements, smart money — $5
+GET /api/v2/funding-rounds — VC funding rounds, valuations — $5
+POST /api/v2/competitor-intel — Deep competitive analysis — $5
+GET /api/v2/hedge-funds — 13F filings, sector rotations — $5
+GET /api/v2/dao-governance — DAO proposals, voting, treasury — $5
+GET /api/v2/geopolitical-crisis — Iran/Israel/Russia/Trump tariffs real-time — $25
 
 ---
 
-## Free Endpoints (No Payment Required)
+## Bundles — $0.50–$500 USDC (8 packages)
 
-- `GET /health` — Node uptime, request counts, revenue stats, network
-- `GET /stats` — Full service catalog with all endpoints, prices, and descriptions
-- `GET /.well-known/agent-card.json` — A2A agent card (Google A2A / Agentverse spec)
-- `GET /mcp/manifest` — MCP server manifest (tool list + pricing)
-- `POST /mcp` — Model Context Protocol endpoint (13 tools, stateless HTTP transport)
-
----
-
-## Discovery & Registration
-
-- **x402 Registry**: https://www.x402scan.com/resources/register
-- **ACP Marketplace**: https://app.virtuals.io/research/agent-commerce-protocol (14 offerings)
-- **MCP Registry**: https://smithery.ai and https://registry.modelcontextprotocol.io
-- **A2A Card**: `/.well-known/agent-card.json`
-- **LLMs.txt**: `/llms.txt` (this file)
+POST /api/bundle/starter — Compliance+sentiment+signals+macro+news — $0.50
+POST /api/bundle/market-intel — Signals+onchain+macro+options+insider+earnings — $25
+POST /api/bundle/company-deep — Profile+intel+competitor+hedgefunds+ratings — $50
+POST /api/bundle/crypto-alpha — Onchain+whale+defi+ai-tokens+derivatives — $25
+POST /api/bundle/macro-global — Macro+bonds+FX+rates+inflation+labor — $50
+POST /api/bundle/ai-economy — ArXiv+GitHub+jobs+model-prices+ai-tokens — $100
+POST /api/bundle/sovereign — ALL endpoints. Maximum intelligence. — $500
+POST /api/bundle/geopolitical — Full geopolitical war room package — $200
 
 ---
 
-## Data Sources
+## MCP (Model Context Protocol)
 
-All data is real-time from authoritative sources:
-- **Compliance**: EUR-Lex EU legislation, CISA KEV feed, AI Incident Database
-- **Sanctions**: OpenSanctions (OFAC + EU + UN + UK)
-- **Sentiment**: Alternative.me Fear & Greed, CoinGecko Global Market API
-- **Signals**: Yahoo Finance OHLCV, Frankfurter ECB FX rates
-- **Macro**: FRED (St. Louis Fed), World Bank Data API, US Treasury FiscalData, Frankfurter ECB
-- **News**: HackerNews Algolia API, Reddit public JSON feeds, NewsAPI
-- **Research**: ArXiv.org Atom API (cs.AI, cs.LG, cs.CL, cs.CV, cs.RO, cs.MA)
-- **Blockchain**: Mempool.space (Bitcoin), Etherscan Gas Oracle, DeFi Llama TVL + Yields
-- **SEC Filings**: EDGAR Full-Text Search API (efts.sec.gov)
-- **Jobs**: Greenhouse Public API, Lever API, HackerNews Who's Hiring, Remotive
-- **GitHub**: GitHub REST API v2022-11-28
-- **Patents**: USPTO PatentsView v2 API (search.patentsview.org)
-- **Company**: Aggregated from all above sources
+Endpoint: /mcp (HTTP transport, 56 tools)
+Smithery: https://smithery.ai/servers/luckkyyy23/omni-service-node
 
 ---
 
-## Notes for AI Agents
+## Free
 
-- All endpoints return JSON
-- 402 responses include `X-PAYMENT-REQUIREMENTS` header with base64-encoded payment details
-- After payment, resend identical request with `X-PAYMENT` header
-- No session required — every call is stateless and self-contained
-- Tier 1 endpoints are idempotent GET requests (except sanctions which is POST)
-- Tier 2 endpoints may include POST for multi-entity queries
-- Rate limits: none — pay-per-call model with no throttling
-- Response times: Tier 1 ~100-500ms, Tier 2 ~1-5s (multi-source aggregation)
+GET /health | GET /stats | GET /.well-known/agent-card.json | GET /.well-known/x402 | GET /llms.txt

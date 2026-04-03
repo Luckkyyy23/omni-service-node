@@ -1,132 +1,963 @@
 {
   "name": "Omni Service Node",
-  "description": "The petrol station for autonomous AI agents. 14 pay-per-call endpoints covering every intelligence category: EU AI Act compliance, sanctions screening, market signals, macro economics, real-time news, ArXiv research, on-chain blockchain data, B2B intelligence, GitHub pivot tracking, job signals, SEC filings, USPTO patents, and company profiles. x402 USDC on Base — no accounts, no subscriptions, no rate limits.",
+  "version": "3.1.0",
+  "description": "The petrol station for autonomous AI agents. 56 pay-per-call endpoints: trading signals, macro economics, geopolitical crisis intel, crypto/DeFi, whale tracking, SEC filings, insider trades, options flow, ArXiv research, sanctions screening, AI tokens, Bittensor, DeFi yields, stablecoins, NFT market, IPO calendar, earnings, commodities, FX rates, space weather, semiconductor supply, real estate, M&A. Pure USDC on Base Mainnet. No accounts, no subscriptions.",
   "url": "https://omni-service-node-production.up.railway.app",
-  "version": "2.0.0",
-  "provider": { "organization": "Omni Service Node", "url": "https://omni-service-node-production.up.railway.app" },
-  "capabilities": { "streaming": false, "pushNotifications": false, "stateTransitionHistory": false },
-  "defaultInputModes": ["application/json"],
-  "defaultOutputModes": ["application/json"],
-  "skills": [
-    {
-      "id": "ai-compliance",
-      "name": "EU AI Act Compliance",
-      "description": "Classify any AI system against EU Regulation 2024/1689. Prohibited/high-risk/limited-risk/minimal-risk with obligations, deadlines, CISA alerts.",
-      "tags": ["compliance", "regulation", "eu-ai-act", "cisa", "risk"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "sanctions-screen",
-      "name": "Global Sanctions Screening",
-      "description": "Screen entities against OFAC, EU, UN, UK sanctions lists. Match probability, risk level, matched records.",
-      "tags": ["sanctions", "ofac", "aml", "kyc", "compliance"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "market-sentiment",
-      "name": "Crypto & AI Sentiment Feed",
-      "description": "Fear/greed index, CoinGecko global market, asset prices, trending tokens, RISK_ON/RISK_OFF signal.",
-      "tags": ["sentiment", "crypto", "fear-greed", "market", "coingecko"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "market-signals",
-      "name": "Directional Market Signals",
-      "description": "BUY/SELL/HOLD with entry, stop loss, take profit, R:R, RSI, EMA, ATR for Gold, BTC, FX pairs.",
-      "tags": ["trading", "signals", "gold", "bitcoin", "forex", "xauusd"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "macro-intelligence",
-      "name": "Global Macro Economic Data",
-      "description": "Fed rate, US CPI, M2, unemployment, GDP, yield curve, G10 FX. Rate environment: RESTRICTIVE/NEUTRAL/ACCOMMODATIVE.",
-      "tags": ["macro", "federal-reserve", "inflation", "gdp", "yield-curve", "fx"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "news-intelligence",
-      "name": "Real-Time AI & Market News",
-      "description": "HackerNews + Reddit (r/MachineLearning, r/LocalLLaMA) + NewsAPI. Scored articles, trending keywords, signal strength.",
-      "tags": ["news", "hackernews", "reddit", "ai", "market", "tech"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "arxiv-research",
-      "name": "ArXiv AI Research Papers",
-      "description": "Latest cs.AI, cs.LG, cs.CL papers with impact scoring, breakthrough detection, trending topics, author velocity.",
-      "tags": ["research", "arxiv", "papers", "ai", "ml", "llm", "agents"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "onchain-intelligence",
-      "name": "Blockchain & DeFi On-Chain Data",
-      "description": "BTC fees/mempool/hashrate, ETH gas oracle, DeFi TVL from 500+ protocols, top yield opportunities.",
-      "tags": ["blockchain", "bitcoin", "ethereum", "defi", "tvl", "yield", "gas"],
-      "payment": { "protocol": "x402", "price": "0.005", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "b2b-intel",
-      "name": "B2B Golden Lead Packets",
-      "description": "Aggregated SEC + GitHub + Jobs into HOT/WARM/COLD scored company leads with AI pivot signals and outreach angles.",
-      "tags": ["b2b", "sales", "leads", "intelligence", "sec", "github"],
-      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "github-velocity",
-      "name": "GitHub AI Pivot Tracker",
-      "description": "Fortune 500 GitHub org analysis — AI repo count, topic pivots, star velocity, commit frequency. Buyer signal.",
-      "tags": ["github", "engineering", "ai-pivot", "velocity", "repositories"],
-      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "job-pivots",
-      "name": "AI Hiring Signal Intelligence",
-      "description": "Companies actively hiring AI roles — strongest buyer signal. Greenhouse, Lever, HackerNews, Remotive.",
-      "tags": ["hiring", "jobs", "ai-roles", "buyer-signal", "growth"],
-      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "sec-filings",
-      "name": "SEC AI Filings Intelligence",
-      "description": "Real-time 8-K/10-K filings from public companies mentioning AI/agentic. AI-scored, direct EDGAR links.",
-      "tags": ["sec", "edgar", "filings", "8-k", "regulatory", "ai"],
-      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "patent-intelligence",
-      "name": "USPTO AI Patent Intelligence",
-      "description": "Who is filing AI, neural network, autonomous agent, LLM patents. USPTO PatentsView full database.",
-      "tags": ["patents", "ip", "uspto", "innovation", "r&d", "ai"],
-      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
-    },
-    {
-      "id": "company-profile",
-      "name": "Full Company Intelligence Dossier",
-      "description": "SEC + GitHub + Jobs + Patents + Community sentiment → lead score with outreach angle. Most comprehensive company profile available.",
-      "tags": ["company", "dossier", "b2b", "lead-score", "sales", "intelligence"],
-      "payment": { "protocol": "x402", "price": "5.00", "currency": "USDC", "network": "base" }
-    }
+  "provider": {
+    "organization": "Omni Service Node",
+    "url": "https://omni-service-node-production.up.railway.app"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": [
+    "application/json"
   ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "x402": {
+    "network": "base",
+    "chainId": "eip155:8453",
+    "token": "USDC",
+    "contract": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "payTo": "0x2DFe3B1C304DAd9F1b41D780ea81fCd137d810D8",
+    "discovery": "/.well-known/x402",
+    "tiers": {
+      "fuel": {
+        "path": "/api/v1/*",
+        "price": "0.005 USDC",
+        "endpoints": 36
+      },
+      "premium": {
+        "path": "/api/v2/*",
+        "price": "5.00-25.00 USDC",
+        "endpoints": 12
+      },
+      "bundles": {
+        "path": "/api/bundle/*",
+        "price": "0.50-500.00 USDC",
+        "endpoints": 8
+      }
+    }
+  },
+  "mcp": {
+    "endpoint": "/mcp",
+    "tools": 56,
+    "smithery": "https://smithery.ai/servers/luckkyyy23/omni-service-node"
+  },
+  "a2a": {
+    "protocol": "google-a2a-v1",
+    "endpoint": "https://omni-service-node-production.up.railway.app"
+  },
   "securitySchemes": {
     "x402Payment": {
       "type": "apiKey",
       "in": "header",
       "name": "X-PAYMENT",
-      "description": "x402 USDC micropayment on Base via Coinbase facilitator"
+      "description": "x402 USDC micropayment on Base Mainnet"
     }
   },
-  "security": [{ "x402Payment": [] }],
-  "x402": {
-    "network": "base",
-    "payTo": "0x2DFe3B1C304DAd9F1b41D780ea81fCd137d810D8",
-    "tiers": {
-      "fuel":    { "path": "/api/v1/*", "price": "0.005 USDC", "endpoints": 8 },
-      "premium": { "path": "/api/v2/*", "price": "5.00 USDC",  "endpoints": 6 }
+  "security": [
+    {
+      "x402Payment": []
     }
-  },
-  "acp": {
-    "marketplace": "https://app.virtuals.io/research/agent-commerce-protocol",
-    "offerings": ["fuel-compliance", "fuel-sentiment", "fuel-signals", "fuel-macro", "fuel-news", "fuel-arxiv", "fuel-onchain", "premium-intel", "premium-sec-filings", "premium-patents", "premium-company-profile"]
-  },
-  "mcp": { "endpoint": "/mcp", "manifest": "/mcp/manifest", "tools": 13 }
+  ],
+  "skills": [
+    {
+      "id": "check-ai-compliance",
+      "name": "EU AI Act Compliance",
+      "description": "EU Regulation 2024/1689 risk classification. Returns risk tier, legal obligations, deadlines, CISA alerts.",
+      "tags": [
+        "compliance",
+        "eu-ai-act",
+        "regulation",
+        "risk"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "screen-sanctions",
+      "name": "Global Sanctions Screening",
+      "description": "OFAC, EU, UN, UK sanctions screening. Returns match probability and risk level.",
+      "tags": [
+        "sanctions",
+        "ofac",
+        "aml",
+        "kyc"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-market-sentiment",
+      "name": "Market Sentiment",
+      "description": "Fear/Greed index, CoinGecko market data, RISK_ON/RISK_OFF signal.",
+      "tags": [
+        "sentiment",
+        "crypto",
+        "fear-greed"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-trading-signal",
+      "name": "Trading Signals",
+      "description": "BUY/SELL/HOLD with entry, stop, target, R:R for Gold, BTC, FX.",
+      "tags": [
+        "trading",
+        "signals",
+        "gold",
+        "bitcoin",
+        "forex"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-macro-data",
+      "name": "Global Macro Data",
+      "description": "Fed rate, CPI, M2, GDP, yield curve, G10 FX.",
+      "tags": [
+        "macro",
+        "fed",
+        "inflation",
+        "gdp"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-ai-news",
+      "name": "AI & Market News",
+      "description": "HackerNews + Reddit + NewsAPI. Scored articles and trending keywords.",
+      "tags": [
+        "news",
+        "ai",
+        "market"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-arxiv-research",
+      "name": "ArXiv AI Research",
+      "description": "Latest AI/ML/LLM papers with impact scoring and breakthrough detection.",
+      "tags": [
+        "research",
+        "arxiv",
+        "ai",
+        "llm"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-onchain-data",
+      "name": "On-Chain Blockchain Data",
+      "description": "BTC/ETH/DeFi on-chain: fees, gas, TVL from 500+ protocols, top yields.",
+      "tags": [
+        "blockchain",
+        "bitcoin",
+        "defi",
+        "tvl"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-earnings",
+      "name": "Earnings Calendar",
+      "description": "Upcoming + recent earnings: EPS, revenue, beat/miss signals.",
+      "tags": [
+        "earnings",
+        "stocks"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-commodities",
+      "name": "Commodities Prices",
+      "description": "Gold, silver, oil, wheat, corn, copper — spot prices and trends.",
+      "tags": [
+        "commodities",
+        "gold",
+        "oil"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-economic-calendar",
+      "name": "Economic Calendar",
+      "description": "CPI, NFP, FOMC, GDP high-impact event releases.",
+      "tags": [
+        "calendar",
+        "cpi",
+        "fomc"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-insider-trades",
+      "name": "Insider Trades",
+      "description": "SEC Form 4 insider buys/sells — bullish/bearish signal.",
+      "tags": [
+        "insider",
+        "sec",
+        "form4"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-options-flow",
+      "name": "Options Flow",
+      "description": "Unusual volume/OI spikes on SPY, QQQ, NVDA.",
+      "tags": [
+        "options",
+        "flow",
+        "unusual"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-market-movers",
+      "name": "Market Movers",
+      "description": "Top gainers, losers, most active stocks with volume surge.",
+      "tags": [
+        "movers",
+        "gainers",
+        "volume"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-ipo-calendar",
+      "name": "IPO Calendar",
+      "description": "Upcoming + recent IPOs: size, pricing, market cap.",
+      "tags": [
+        "ipo",
+        "listings"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-analyst-ratings",
+      "name": "Analyst Ratings",
+      "description": "Upgrades/downgrades on AI/tech stocks with price targets.",
+      "tags": [
+        "analyst",
+        "ratings"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-fear-index",
+      "name": "VIX & Fear Index",
+      "description": "VIX + Fear & Greed — market risk temperature.",
+      "tags": [
+        "vix",
+        "fear",
+        "volatility"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-fx-rates",
+      "name": "Live FX Rates",
+      "description": "Live FX rates: major, minor, crypto vs USD.",
+      "tags": [
+        "forex",
+        "fx",
+        "currency"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-nft-market",
+      "name": "NFT Market",
+      "description": "Floor prices, volume, sentiment across major collections.",
+      "tags": [
+        "nft",
+        "floor",
+        "volume"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-defi-yields",
+      "name": "DeFi Yields",
+      "description": "Top yields across Aave, Compound, Curve, Yearn and 100+ protocols.",
+      "tags": [
+        "defi",
+        "yield",
+        "apy"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-token-unlocks",
+      "name": "Token Unlocks",
+      "description": "Upcoming vesting unlocks — supply pressure signals.",
+      "tags": [
+        "unlocks",
+        "vesting",
+        "tokens"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-crypto-derivatives",
+      "name": "Crypto Derivatives",
+      "description": "Funding rates, open interest, liquidations across futures and options.",
+      "tags": [
+        "derivatives",
+        "futures",
+        "funding"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-stablecoins",
+      "name": "Stablecoin Monitor",
+      "description": "Peg deviation, depeg risk for USDT/USDC/DAI/FRAX.",
+      "tags": [
+        "stablecoins",
+        "usdt",
+        "peg"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-virtuals-protocol",
+      "name": "Virtuals Protocol Agents",
+      "description": "Top AI agents by price, market cap, volume on Virtuals Protocol.",
+      "tags": [
+        "virtuals",
+        "ai-agents"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-ai-tokens",
+      "name": "AI Tokens Sector",
+      "description": "NEAR, FET, AGIX, RNDR, WLD, TAO — sector performance.",
+      "tags": [
+        "ai-tokens",
+        "tao",
+        "fetch"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-bittensor",
+      "name": "Bittensor Network",
+      "description": "TAO subnet activity, validator rewards, network health.",
+      "tags": [
+        "bittensor",
+        "tao",
+        "subnet"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-model-prices",
+      "name": "AI Model Prices",
+      "description": "Cost per 1M tokens: OpenAI, Anthropic, Google, Mistral, Groq.",
+      "tags": [
+        "ai-pricing",
+        "llm-cost",
+        "tokens"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-space-weather",
+      "name": "Space Weather",
+      "description": "NOAA KP index, solar flux, geomagnetic storm alerts.",
+      "tags": [
+        "space",
+        "solar",
+        "geomagnetic"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-earthquake-monitor",
+      "name": "Earthquake Monitor",
+      "description": "USGS earthquakes by magnitude and region.",
+      "tags": [
+        "earthquake",
+        "usgs",
+        "seismic"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-energy-prices",
+      "name": "Energy Prices",
+      "description": "Oil, gas, electricity, renewables spot prices.",
+      "tags": [
+        "energy",
+        "oil",
+        "gas"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-shipping-rates",
+      "name": "Shipping Rates",
+      "description": "Baltic Dry Index, container rates, supply chain signals.",
+      "tags": [
+        "shipping",
+        "freight",
+        "bdi"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-semiconductor-supply",
+      "name": "Semiconductor Supply",
+      "description": "Chip supply/demand, lead times, TSMC/NVIDIA signals.",
+      "tags": [
+        "semiconductors",
+        "chips",
+        "tsmc"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-merger-activity",
+      "name": "M&A Activity",
+      "description": "Merger deals, premiums, strategic signals.",
+      "tags": [
+        "mergers",
+        "acquisitions",
+        "deals"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-private-equity",
+      "name": "Private Equity",
+      "description": "PE fund activity, deal flow, portfolio companies.",
+      "tags": [
+        "private-equity",
+        "pe",
+        "venture"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-real-estate-market",
+      "name": "Real Estate Market",
+      "description": "Housing prices, mortgage rates, inventory, market conditions.",
+      "tags": [
+        "real-estate",
+        "housing",
+        "mortgage"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-github-trending",
+      "name": "GitHub Trending",
+      "description": "Trending repos by language, stars, AI/ML detection.",
+      "tags": [
+        "github",
+        "trending",
+        "open-source"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.005",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-b2b-intel",
+      "name": "B2B Lead Intelligence",
+      "description": "HOT/WARM/COLD scored company leads with AI pivot signals.",
+      "tags": [
+        "b2b",
+        "sales",
+        "leads",
+        "crm"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-github-velocity",
+      "name": "GitHub AI Pivot Tracker",
+      "description": "Fortune 500 GitHub org velocity and AI adoption signals.",
+      "tags": [
+        "github",
+        "ai-pivot",
+        "enterprise"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-job-pivots",
+      "name": "AI Hiring Signals",
+      "description": "Companies hiring AI/agentic roles — strongest buyer intent.",
+      "tags": [
+        "hiring",
+        "jobs",
+        "ai-roles"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-sec-filings",
+      "name": "SEC AI Filings",
+      "description": "Real-time 8-K/10-K filings mentioning AI/agentic — scored.",
+      "tags": [
+        "sec",
+        "edgar",
+        "filings"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-ai-patents",
+      "name": "AI Patent Intelligence",
+      "description": "USPTO AI patent filings ranked by assignee volume.",
+      "tags": [
+        "patents",
+        "uspto",
+        "ip"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-company-profile",
+      "name": "Company Intelligence Dossier",
+      "description": "SEC + GitHub + Jobs + Patents + Sentiment → full lead score.",
+      "tags": [
+        "company",
+        "dossier",
+        "b2b",
+        "intelligence"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-whale-tracker",
+      "name": "Crypto Whale Tracker",
+      "description": "Large wallet movements, accumulation/distribution, smart money.",
+      "tags": [
+        "whale",
+        "smart-money",
+        "crypto"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-funding-rounds",
+      "name": "Startup Funding Rounds",
+      "description": "Latest VC rounds, valuations, lead investors.",
+      "tags": [
+        "funding",
+        "vc",
+        "startups"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-competitor-intel",
+      "name": "Competitor Intelligence",
+      "description": "Deep competitive analysis: positioning, pricing, hiring, product.",
+      "tags": [
+        "competitor",
+        "strategy",
+        "market-research"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-hedge-funds",
+      "name": "Hedge Fund Activity",
+      "description": "13F filings, top holdings, sector rotations, activist positions.",
+      "tags": [
+        "hedge-funds",
+        "13f",
+        "institutions"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-dao-governance",
+      "name": "DAO Governance",
+      "description": "Active proposals, voting outcomes, treasury movements.",
+      "tags": [
+        "dao",
+        "governance",
+        "treasury"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "5.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "get-geopolitical-crisis",
+      "name": "Geopolitical Crisis Intel",
+      "description": "Iran/Israel, Russia/Ukraine, Trump tariffs, sanctions escalations.",
+      "tags": [
+        "geopolitical",
+        "crisis",
+        "iran",
+        "tariffs"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "25.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-starter",
+      "name": "Starter Bundle",
+      "description": "Compliance + sentiment + signals + macro + news.",
+      "tags": [
+        "bundle"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "0.50",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-market-intel",
+      "name": "Market Intel Bundle",
+      "description": "Signals + onchain + macro + options + insider trades + earnings.",
+      "tags": [
+        "bundle",
+        "market"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "25.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-company-deep",
+      "name": "Company Deep Dive",
+      "description": "Profile + intel + competitor + hedge funds + ratings + filings.",
+      "tags": [
+        "bundle",
+        "company"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "50.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-crypto-alpha",
+      "name": "Crypto Alpha Bundle",
+      "description": "Onchain + whale + DeFi + AI tokens + derivatives + stablecoins.",
+      "tags": [
+        "bundle",
+        "crypto"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "25.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-macro-global",
+      "name": "Global Macro Bundle",
+      "description": "Macro + bonds + FX + rates + inflation + labor.",
+      "tags": [
+        "bundle",
+        "macro"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "50.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-ai-economy",
+      "name": "AI Economy Bundle",
+      "description": "ArXiv + GitHub + jobs + model prices + AI tokens + regulatory.",
+      "tags": [
+        "bundle",
+        "ai"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "100.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-sovereign",
+      "name": "Sovereign Bundle",
+      "description": "ALL endpoints. Maximum intelligence.",
+      "tags": [
+        "bundle",
+        "sovereign"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "500.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    },
+    {
+      "id": "bundle-geopolitical",
+      "name": "Geopolitical War Room",
+      "description": "Full geopolitical crisis package — all regions, all signals.",
+      "tags": [
+        "bundle",
+        "geopolitical"
+      ],
+      "payment": {
+        "protocol": "x402",
+        "price": "200.00",
+        "currency": "USDC",
+        "network": "base"
+      }
+    }
+  ]
 }
