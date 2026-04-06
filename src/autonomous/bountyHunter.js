@@ -8,7 +8,6 @@
 
 import cron from "node-cron";
 import axios from "axios";
-import { chromium } from "playwright";
 
 const ACP_MARKETPLACE = "https://app.virtuals.io/research/agent-commerce-protocol";
 
@@ -70,46 +69,25 @@ async function fulfillBounty(bounty) {
   }
 }
 
-// Scrape ACP marketplace for bounties using Playwright
+// Fetch bounties from ACP marketplace via API
 async function scrapeBounties() {
-  let browser;
   try {
-    browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.setUserAgent("Mozilla/5.0 (compatible; OmniServiceBot/1.0; +https://omni-service.io)");
-    await page.goto(ACP_MARKETPLACE, { waitUntil: "networkidle", timeout: 30000 });
-
-    // Wait for job listings to load
-    await page.waitForSelector('[data-testid="job-listing"], .job-card, [class*="bounty"], [class*="job"]', {
+    const res = await axios.get("https://app.virtuals.io/api/acp/jobs", {
       timeout: 10000,
-    }).catch(() => {});
-
-    // Extract bounty data
-    const bounties = await page.evaluate(() => {
-      const items = [];
-      // Try multiple selectors — ACP UI may vary
-      const selectors = ['[data-testid="job-listing"]', '.bounty-card', '[class*="JobCard"]', 'article'];
-      for (const sel of selectors) {
-        document.querySelectorAll(sel).forEach(el => {
-          const text  = el.innerText || "";
-          const link  = el.querySelector("a")?.href || "";
-          const price = text.match(/\$[\d,]+|\d+\s*USDC/i)?.[0] || "";
-          const title = el.querySelector("h2,h3,h4,[class*='title']")?.innerText?.trim() || text.slice(0, 80);
-          if (title && price) {
-            items.push({ title, price, link, description: text.slice(0, 300) });
-          }
-        });
-        if (items.length > 0) break;
-      }
-      return items;
+      headers: { "User-Agent": "OmniServiceBot/1.0" },
     });
-
-    return bounties;
+    const jobs = Array.isArray(res.data) ? res.data : (res.data?.jobs || res.data?.data || []);
+    return jobs.map(j => ({
+      title:       j.title || j.name || "",
+      price:       j.reward || j.budget || j.price || "",
+      link:        j.url || j.link || "",
+      description: j.description || j.details || "",
+      jobId:       j.id || j.jobId || "",
+      company:     j.company || j.employer || "",
+    }));
   } catch (e) {
-    console.error("[BOUNTY] Scrape failed:", e.message);
+    // API not available — silent fail, no browser needed
     return [];
-  } finally {
-    if (browser) await browser.close();
   }
 }
 
