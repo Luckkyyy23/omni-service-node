@@ -1433,6 +1433,20 @@ export function createMcpRouter() {
       registerPrompts(server);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
 
+      // Inject SSE done event into stream before controller.close() (required by Smithery)
+      const wt = transport._webStandardTransport;
+      const origSet = wt._streamMapping.set.bind(wt._streamMapping);
+      wt._streamMapping.set = function(key, stream) {
+        if (stream.controller && stream.encoder && stream.cleanup) {
+          const origCleanup = stream.cleanup;
+          stream.cleanup = () => {
+            try { stream.controller.enqueue(stream.encoder.encode('event: done\ndata: {}\n\n')); } catch {}
+            origCleanup();
+          };
+        }
+        return origSet(key, stream);
+      };
+
       await server.connect(transport);
       await transport.handleRequest(req, res, req.body);
     } catch (e) {
