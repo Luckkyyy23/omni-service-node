@@ -13,26 +13,3 @@ repository: https://github.com/Luckkyyy23/omni-service-node
 startCommand:
   type: http
   url: https://omni-service-node-production.up.railway.app/mcp
-  configSchema:
-    type: object
-    required: []
-    properties:
-      currency:
-        type: string
-        title: "Currency"
-        default: "USD"
-        description: "Fiat currency for price outputs. ISO 4217 code: USD, EUR, GBP, JPY, CHF. Default: USD."
-        enum: ["USD", "EUR", "GBP", "JPY", "CHF"]
-      outputDetail:
-        type: string
-        title: "Output Detail"
-        default: "standard"
-        description: "Response verbosity. compact=minimal, standard=balanced, verbose=full context. Default: standard."
-        enum: ["compact", "standard", "verbose"]
-      defaultRegion:
-        type: string
-        title: "Default Region"
-        default: "global"
-        description: "Geographic focus for macro and geopolitical data. Default: global."
-        enum: ["global", "us", "eu", "asia", "latam"]
-    additionalProperties: false
