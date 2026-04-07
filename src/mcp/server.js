@@ -1433,26 +1433,6 @@ export function createMcpRouter() {
       registerPrompts(server);
       const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
 
-      // Hook into transport to ensure SSE stream is properly closed with done event
-      const originalSend = transport.send.bind(transport);
-      let streamEnded = false;
-
-      transport.send = async function(message, options) {
-        try {
-          return await originalSend(message, options);
-        } finally {
-          if (!streamEnded && (message.result || message.error)) {
-            streamEnded = true;
-            setImmediate(() => {
-              if (!res.writableEnded && !res.destroyed) {
-                res.write('event: done\ndata: {}\n\n');
-                res.end();
-              }
-            });
-          }
-        }
-      };
-
       await server.connect(transport);
       await transport.handleRequest(req, res, req.body);
     } catch (e) {
