@@ -23,7 +23,7 @@ function registerTools(server) {
   // ── TIER 1 — $0.005/call ─────────────────────────────────────────────────────
 
   server.tool(
-    "checkAiCompliance",
+    "check_ai_compliance",
     `Classify an AI system under EU AI Act 2024/1689 and return its risk tier, legal obligations, and compliance deadlines.
 
 Use this tool when:
@@ -50,7 +50,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "screenSanctions",
+    "screen_sanctions",
     `Screen a person, company, vessel, or crypto wallet against OFAC (US), EU, UN, and UK sanctions lists in a single call.
 
 Use this tool when:
@@ -75,7 +75,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getMarketSentiment",
+    "get_market_sentiment",
     `Get the current market risk appetite: Fear & Greed index, global crypto market data, live asset prices, trending tokens, and a RISK_ON/RISK_OFF signal.
 
 Use this tool when:
@@ -97,7 +97,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getTradingSignal",
+    "get_trading_signal",
     `Generate a BUY, SELL, or HOLD signal for a trading instrument with full technical analysis: entry price, stop loss, take profit, risk-reward ratio, RSI, EMA stack, ATR, and confidence score.
 
 Use this tool when:
@@ -123,7 +123,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getMacroData",
+    "get_macro_data",
     `Fetch macroeconomic fundamentals for major economies: central bank interest rates, CPI inflation, M2 money supply, unemployment, GDP growth, yield curve shape, and G10 FX rates. Returns a rate_environment signal (HAWKISH/DOVISH/NEUTRAL).
 
 Use this tool when:
@@ -145,7 +145,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getAiNews",
+    "get_ai_news",
     `Fetch real-time news and intelligence from HackerNews, Reddit (r/MachineLearning, r/LocalLLaMA, r/CryptoCurrency), and NewsAPI. Returns scored articles ranked by relevance and virality, plus trending keywords.
 
 Use this tool when:
@@ -170,7 +170,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getArxivResearch",
+    "get_arxiv_research",
     `Search ArXiv for the latest AI/ML academic papers with breakthrough detection, citation velocity, trending topics, and top authors. Covers cs.AI, cs.LG (machine learning), cs.CL (NLP), cs.CV (computer vision), cs.RO (robotics), and cs.MA (multi-agent).
 
 Use this tool when:
@@ -196,7 +196,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getOnchainData",
+    "get_onchain_data",
     `Fetch live blockchain metrics: Bitcoin mempool congestion and fees, Ethereum gas oracle (slow/standard/fast), DeFi total value locked (TVL) across 500+ protocols, and top yield opportunities ranked by APY.
 
 Use this tool when:
@@ -219,7 +219,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getEarnings",
+    "get_earnings",
     `Fetch upcoming and recent earnings reports for US public companies: EPS estimates vs actuals, revenue beats/misses, guidance changes, and a BEAT/MISS/IN-LINE signal.
 
 Use this tool when:
@@ -243,7 +243,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getCommodities",
+    "get_commodities",
     `Get spot prices, 24h/7d trend, and supply/demand signals for physical commodities: gold, silver, crude oil, wheat, corn, copper, and natural gas.
 
 Use this tool when:
@@ -265,7 +265,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getEconomicCalendar",
+    "get_economic_calendar",
     `Fetch the high-impact economic events calendar: CPI inflation releases, Non-Farm Payrolls (NFP), FOMC rate decisions, GDP prints, PMI data — with consensus forecasts vs prior values and market impact ratings.
 
 Use this tool when:
@@ -288,7 +288,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getInsiderTrades",
+    "get_insider_trades",
     `Fetch SEC Form 4 filings showing insider buying and selling at US public companies. Returns a bullish/bearish signal based on the direction and size of insider transactions.
 
 Use this tool when:
@@ -312,7 +312,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getOptionsFlow",
+    "get_options_flow",
     `Detect unusual options activity — large block trades, sweeps, and dark pool prints that may signal institutional positioning. Identifies volume/open-interest spikes and classifies them as bullish or bearish.
 
 Use this tool when:
@@ -336,7 +336,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getMarketMovers",
+    "get_market_movers",
     `Get today's top gaining, top losing, and most actively traded stocks with volume surge signals and percentage moves.
 
 Use this tool when:
@@ -360,7 +360,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getIpoCalendar",
+    "get_ipo_calendar",
     `Fetch upcoming and recently priced IPOs with deal size, pricing range, market cap, sector, and underwriter details.
 
 Use this tool when:
@@ -382,7 +382,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getAnalystRatings",
+    "get_analyst_ratings",
     `Fetch Wall Street analyst upgrades and downgrades: firm name, rating change, new price target, and implied upside/downside from current price.
 
 Use this tool when:
@@ -406,7 +406,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getFearIndex",
+    "get_fear_index",
     `Get the current VIX (CBOE Volatility Index) alongside the CNN Fear & Greed composite index, with historical context showing whether current fear levels are extreme (contrarian buy) or extreme greed (contrarian sell).
 
 Use this tool when:
@@ -428,7 +428,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getFxRates",
+    "get_fx_rates",
     `Get live foreign exchange rates for major pairs, minor pairs, the Dollar Index (DXY), and crypto/USD crosses.
 
 Use this tool when:
@@ -450,7 +450,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getNftMarket",
+    "get_nft_market",
     `Monitor the NFT market: floor prices, 24h/7d volume, blue-chip collection sentiment, wash trade detection, and overall market health signal.
 
 Use this tool when:
@@ -472,7 +472,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getDefiYields",
+    "get_defi_yields",
     `Find the highest-yielding DeFi opportunities across Aave, Compound, Curve, Yearn, Morpho, and 100+ protocols. Returns APY, TVL, risk rating, and protocol audit status.
 
 Use this tool when:
@@ -495,7 +495,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getTokenUnlocks",
+    "get_token_unlocks",
     `Track upcoming token vesting unlock events that could create selling pressure on crypto assets. Returns unlock schedule, percentage of circulating supply, and estimated market impact.
 
 Use this tool when:
@@ -517,7 +517,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getCryptoDerivatives",
+    "get_crypto_derivatives",
     `Fetch crypto futures and options market data: funding rates (positive = longs paying shorts), open interest trends, recent liquidations, and basis (spot vs futures premium/discount).
 
 Use this tool when:
@@ -540,7 +540,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getStablecoins",
+    "get_stablecoins",
     `Monitor stablecoin health: peg deviation from $1.00, supply changes (minting/burning), market cap, backing composition, and depeg risk score.
 
 Use this tool when:
@@ -562,7 +562,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getVirtualsProtocol",
+    "get_virtuals_protocol",
     `Get live data on AI agents from the Virtuals Protocol ecosystem: token prices, market cap, 24h volume, trading activity, and rankings by agent activity score.
 
 Use this tool when:
@@ -584,7 +584,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getAiTokens",
+    "get_ai_tokens",
     `Fetch performance data for AI/ML sector crypto tokens: NEAR, FET (Fetch.ai), AGIX (SingularityNET), RNDR (Render), WLD (Worldcoin), TAO (Bittensor), and the full AI token sector.
 
 Use this tool when:
@@ -606,7 +606,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getBittensor",
+    "get_bittensor",
     `Get live Bittensor (TAO) network data: subnet activity, validator rewards, emissions per subnet, top miners, and overall network health metrics.
 
 Use this tool when:
@@ -628,7 +628,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getModelPrices",
+    "get_model_prices",
     `Compare AI model inference pricing across all major providers: input/output cost per 1M tokens, context window, capability tier, and best-value recommendations.
 
 Use this tool when:
@@ -650,7 +650,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getSpaceWeather",
+    "get_space_weather",
     `Fetch NOAA space weather data: current KP index (geomagnetic storm intensity), solar flux (F10.7), X-ray flare class, and active NOAA alerts for solar radiation storms and geomagnetic disturbances.
 
 Use this tool when:
@@ -672,7 +672,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getEarthquakeMonitor",
+    "get_earthquake_monitor",
     `Fetch significant recent earthquakes from USGS (United States Geological Survey): magnitude, epicentre location, depth, affected region, and tsunami watch/warning status.
 
 Use this tool when:
@@ -695,7 +695,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getEnergyPrices",
+    "get_energy_prices",
     `Get global energy commodity prices: WTI crude oil, Brent crude, Henry Hub natural gas, LNG (liquefied natural gas), thermal coal, and regional electricity spot prices.
 
 Use this tool when:
@@ -717,7 +717,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getShippingRates",
+    "get_shipping_rates",
     `Get global shipping and freight rates: Baltic Dry Index (BDI) for bulk shipping, Freightos container spot rates for major routes, port congestion indices, and supply chain stress signals.
 
 Use this tool when:
@@ -739,7 +739,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getSemiconductorSupply",
+    "get_semiconductor_supply",
     `Get semiconductor supply chain intelligence: TSMC/Samsung/Intel fab utilisation rates, chip lead times by process node, shortage/oversupply signals, and AI chip availability.
 
 Use this tool when:
@@ -761,7 +761,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getMergerActivity",
+    "get_merger_activity",
     `Track merger and acquisition (M&A) activity: announced deals, rumoured targets (based on options activity and news signals), deal premiums, regulatory status, and sector consolidation trends.
 
 Use this tool when:
@@ -784,7 +784,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getPrivateEquity",
+    "get_private_equity",
     `Fetch private equity (PE) and venture capital (VC) deal flow: funding rounds, exits (IPOs and acquisitions), dry powder levels, sector focus shifts, and notable investor activity.
 
 Use this tool when:
@@ -807,7 +807,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getRealEstateMarket",
+    "get_real_estate_market",
     `Fetch US real estate market data: median home prices, mortgage rates (30yr fixed, 15yr fixed, ARM), active inventory, days-on-market, affordability index, and regional price trends.
 
 Use this tool when:
@@ -830,7 +830,7 @@ Cost: $0.005 USDC per call.`,
   );
 
   server.tool(
-    "getGithubTrending",
+    "get_github_trending",
     `Fetch trending GitHub repositories by stars today/this week/this month. Filter by programming language and topic. AI/ML repositories and agentic frameworks are highlighted.
 
 Use this tool when:
@@ -857,7 +857,7 @@ Cost: $0.005 USDC per call.`,
   // ── TIER 2 — $5–$25/call ─────────────────────────────────────────────────────
 
   server.tool(
-    "getB2bIntel",
+    "get_b2b_intel",
     `Generate Golden Lead packets for B2B sales agents. Cross-references SEC filings, GitHub activity, and job postings to score companies as HOT/WARM/COLD leads with AI pivot signals and recommended outreach angles.
 
 Use this tool when:
@@ -880,7 +880,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getGithubVelocity",
+    "get_github_velocity",
     `Analyse a company's GitHub organisation for AI pivot signals: new AI/ML repositories, topic tag changes, star velocity, commit frequency, and contributor growth. Returns an AI adoption score.
 
 Use this tool when:
@@ -903,7 +903,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getJobPivots",
+    "get_job_pivots",
     `Identify companies actively hiring for agentic AI roles from Greenhouse, Lever, HackerNews Who's Hiring, and Remotive. Job posting spikes are a strong buyer intent signal — companies building AI need AI tools.
 
 Use this tool when:
@@ -927,7 +927,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getSecFilings",
+    "get_sec_filings",
     `Search real-time SEC filings (8-K, 10-K, 10-Q, S-1) for AI/autonomous operations mentions. Returns filings ranked by AI-relevance score with key extracted passages.
 
 Use this tool when:
@@ -952,7 +952,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getAiPatents",
+    "get_ai_patents",
     `Search USPTO patent database for AI-related filings: applicant companies, patent titles, abstract summaries, filing dates, and technology classification. Reveals who is building what in neural networks, autonomous agents, and LLMs.
 
 Use this tool when:
@@ -976,7 +976,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getCompanyProfile",
+    "get_company_profile",
     `Build a full company intelligence dossier by combining SEC filings + GitHub velocity + hiring signals + patent activity + HackerNews sentiment. Returns a HOT/WARM/COLD lead score with recommended action.
 
 Use this tool when:
@@ -1001,7 +1001,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getWhaleTracker",
+    "get_whale_tracker",
     `Monitor on-chain large wallet movements: significant BTC and ETH transfers, exchange inflows (bearish — selling pressure) and outflows (bullish — self-custody), and smart money wallet behaviour.
 
 Use this tool when:
@@ -1024,7 +1024,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getFundingRounds",
+    "get_funding_rounds",
     `Fetch VC and PE funding rounds: deal amount, lead investors, valuation (if disclosed), sector, and stage. AI startup deals are highlighted with tech stack and growth signals.
 
 Use this tool when:
@@ -1048,7 +1048,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getCompetitorIntel",
+    "get_competitor_intel",
     `Build a competitive intelligence dossier: product launches, pricing changes, hiring signals, patent filings, and funding activity for a company vs its competitors. Returns a competitive position assessment.
 
 Use this tool when:
@@ -1072,7 +1072,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getHedgeFunds",
+    "get_hedge_funds",
     `Fetch hedge fund 13F filings from the SEC: top holdings, new positions initiated, positions exited, and sector rotation signals from major funds like Bridgewater, Renaissance, Tiger Global, and Citadel.
 
 Use this tool when:
@@ -1096,7 +1096,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getDaoGovernance",
+    "get_dao_governance",
     `Fetch DAO governance activity: active proposals, voting power distribution, treasury size and composition, community sentiment, and quorum status.
 
 Use this tool when:
@@ -1119,7 +1119,7 @@ Cost: $5 USDC per call.`,
   );
 
   server.tool(
-    "getGeopoliticalCrisis",
+    "get_geopolitical_crisis",
     `Real-time geopolitical crisis monitoring using GDELT event database, OFAC alerts, and social signal analysis. Returns crisis scores, escalation risk, projected market impact on oil/gold/USD/defence stocks, and Reddit/HackerNews viral intelligence.
 
 Use this tool when:
@@ -1144,7 +1144,7 @@ Cost: $25 USDC per call.`,
   // ── BUNDLES — $0.50–$500 ─────────────────────────────────────────────────────
 
   server.tool(
-    "runBundleStarter",
+    "run_bundle_starter",
     `AI Agent Starter Pack — calls compliance + market sentiment + trading signals + macro data + news in a single bundled request. Ideal for agents that need a broad market context snapshot.
 
 Use this tool when:
@@ -1168,7 +1168,7 @@ Cost: $0.50 USDC per call (equivalent to 5 Tier 1 tools for $0.025 if called sep
   );
 
   server.tool(
-    "runBundleMarketIntel",
+    "run_bundle_market_intel",
     `Market Intelligence Pack — combines trading signals + on-chain data + macro + options flow + insider trades + earnings into a comprehensive market intelligence report. Best value for active trading agents.
 
 Use this tool when:
@@ -1191,7 +1191,7 @@ Cost: $25 USDC per call.`,
   );
 
   server.tool(
-    "runBundleCompanyDeep",
+    "run_bundle_company_deep",
     `Company Deep Dive — runs full company profile + competitor intel + hedge fund positioning + analyst ratings + SEC filings for a single company. The most comprehensive company intelligence available.
 
 Use this tool when:
@@ -1215,7 +1215,7 @@ Cost: $50 USDC per call.`,
   );
 
   server.tool(
-    "runBundleCryptoAlpha",
+    "run_bundle_crypto_alpha",
     `Crypto Alpha Pack — aggregates on-chain metrics + whale tracker + DeFi yields + AI tokens + crypto derivatives + stablecoin health into a single crypto market intelligence report.
 
 Use this tool when:
@@ -1238,7 +1238,7 @@ Cost: $25 USDC per call.`,
   );
 
   server.tool(
-    "runBundleMacroGlobal",
+    "run_bundle_macro_global",
     `Global Macro Pack — aggregates macro indicators + FX rates + interest rate environment + inflation data + consumer/labour data across multiple economies into a single macro intelligence report.
 
 Use this tool when:
@@ -1261,7 +1261,7 @@ Cost: $50 USDC per call.`,
   );
 
   server.tool(
-    "runBundleAiEconomy",
+    "run_bundle_ai_economy",
     `AI Economy Intelligence — aggregates ArXiv research + GitHub trending + job pivots + AI model prices + AI tokens + AI regulatory news into a comprehensive AI industry intelligence report.
 
 Use this tool when:
@@ -1284,7 +1284,7 @@ Cost: $100 USDC per call.`,
   );
 
   server.tool(
-    "runBundleSovereign",
+    "run_bundle_sovereign",
     `Sovereign Intelligence — the most comprehensive bundle: ALL 56 endpoints combined into a single sovereign-grade intelligence report. Full macro + geopolitical crisis + company + crypto + hedge funds + AI economy.
 
 Use this tool when:
@@ -1306,7 +1306,7 @@ Cost: $500 USDC per call (vs $100+ if all endpoints called separately).`,
   );
 
   server.tool(
-    "runBundleGeopolitical",
+    "run_bundle_geopolitical",
     `Geopolitical War Room — the deepest geopolitical intelligence bundle: GDELT crisis monitoring + escalation scoring + oil/gold/USD/defence market impact modelling + OFAC sanctions alerts + Reddit/HackerNews viral signal processing. Built for agents that need to act on geopolitical events faster than the market.
 
 Use this tool when:
@@ -1363,9 +1363,9 @@ function registerResources(server) {
         uri: "omni://pricing",
         mimeType: "application/json",
         text: JSON.stringify({
-          tier1:   { priceUSDC: 0.005, tools: 36, examples: ["getTradingSignal","getMacroData","getAiNews"] },
-          tier2:   { priceUSDC: "5–25", tools: 12, examples: ["getB2bIntel","getCompanyProfile","getGeopoliticalCrisis"] },
-          bundles: { priceUSDC: "0.50–500", tools: 8, examples: ["runBundleStarter","runBundleSovereign"] },
+          tier1:   { priceUSDC: 0.005, tools: 36, examples: ["get_trading_signal","get_macro_data","get_ai_news"] },
+          tier2:   { priceUSDC: "5–25", tools: 12, examples: ["get_b2b_intel","get_company_profile","get_geopolitical_crisis"] },
+          bundles: { priceUSDC: "0.50–500", tools: 8, examples: ["run_bundle_starter","run_bundle_sovereign"] },
           payment: { protocol: "x402", token: "USDC", network: "Base Mainnet", noSubscription: true },
         }, null, 2),
       }],
