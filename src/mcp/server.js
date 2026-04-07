@@ -1441,18 +1441,12 @@ export function createMcpRouter() {
         try {
           return await originalSend(message, options);
         } finally {
-          // Check if this was the final response - if so, close the stream gracefully
           if (!streamEnded && (message.result || message.error)) {
             streamEnded = true;
-            // Give a small delay to ensure response fully queued, then signal completion
             setImmediate(() => {
-              try {
-                // Send SSE done event to signal stream closure to client
-                res.write('event: done\n');
-                res.write('data: {}\n\n');
+              if (!res.writableEnded && !res.destroyed) {
+                res.write('event: done\ndata: {}\n\n');
                 res.end();
-              } catch (e) {
-                // Response might already be sent, that's OK
               }
             });
           }
