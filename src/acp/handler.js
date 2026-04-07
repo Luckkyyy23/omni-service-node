@@ -1,13 +1,12 @@
 /**
  * ACP Seller Runtime — Virtuals Protocol Agent Commerce Protocol
- * Registers offerings and serves jobs via WebSocket to ACP marketplace agents
+ * Registers as a seller agent and handles incoming jobs via AcpClient callbacks
  *
  * Package: @virtuals-protocol/acp-node
  * Marketplace: https://app.virtuals.io/research/agent-commerce-protocol
  */
 
-import acpPkg from "@virtuals-protocol/acp-node";
-const { ACPNode } = acpPkg;
+import AcpClient, { AcpContractClientV2 } from "@virtuals-protocol/acp-node";
 
 // ACP Offering definitions — all 14 endpoints
 const OFFERINGS = [
@@ -142,7 +141,7 @@ const OFFERINGS = [
   },
 ];
 
-// Execute a job from an ACP buyer agent
+// Execute a job from an ACP buyer agent — routes to internal API
 async function executeJob(offering, jobInputs) {
   const base = `http://localhost:${process.env.PORT || 3000}`;
 
@@ -269,50 +268,133 @@ async function executeJob(offering, jobInputs) {
   }
 }
 
+// Match an incoming job to one of our offerings by name
+function matchOffering(job) {
+  const jobName = (job.name || "").toLowerCase();
+  const jobReq = typeof job.requirement === "string"
+    ? job.requirement.toLowerCase()
+    : JSON.stringify(job.requirement || {}).toLowerCase();
+
+  for (const offering of OFFERINGS) {
+    if (jobName.includes(offering.name) || jobReq.includes(offering.name)) {
+      return offering.name;
+    }
+  }
+  // Fuzzy: check if any offering keyword appears
+  for (const offering of OFFERINGS) {
+    const keywords = offering.name.split("-");
+    if (keywords.some(kw => jobReq.includes(kw) || jobName.includes(kw))) {
+      return offering.name;
+    }
+  }
+  return null;
+}
+
+// Parse job inputs from the requirement/memo content
+function parseJobInputs(job) {
+  try {
+    const req = job.requirement;
+    if (req && typeof req === "object") return req;
+    if (typeof req === "string") {
+      try { return JSON.parse(req); } catch { /* not JSON */ }
+    }
+    // Try latest memo content
+    const lastMemo = job.latestMemo;
+    if (lastMemo?.content) {
+      try { return JSON.parse(lastMemo.content); } catch { /* not JSON */ }
+    }
+    return {};
+  } catch {
+    return {};
+  }
+}
+
 // ── Start ACP Seller Runtime ──────────────────────────────────────────────────
 export async function startAcpRuntime() {
-  if (!process.env.AGENT_WALLET_PRIVATE_KEY) {
+  const privateKey = process.env.AGENT_WALLET_PRIVATE_KEY;
+  const agentWalletAddress = process.env.AGENT_WALLET_ADDRESS || process.env.WALLET_ADDRESS;
+
+  if (!privateKey) {
     console.warn("[ACP] No AGENT_WALLET_PRIVATE_KEY — seller runtime not started");
+    return;
+  }
+  if (!agentWalletAddress) {
+    console.warn("[ACP] No AGENT_WALLET_ADDRESS / WALLET_ADDRESS — seller runtime not started");
     return;
   }
 
   try {
-    const acp = new ACPNode({
-      walletPrivateKey:    process.env.AGENT_WALLET_PRIVATE_KEY,
-      agentWalletAddress:  process.env.WALLET_ADDRESS,
-    });
+    // Build the contract client (V2 — Base mainnet)
+    // sessionEntityKeyId = 0 for default session key
+    const contractClient = await AcpContractClientV2.build(
+      privateKey,
+      0,
+      agentWalletAddress,
+    );
 
-    // Register all offerings on ACP marketplace
-    for (const offering of OFFERINGS) {
-      try {
-        await acp.registerOffering(offering);
-        console.log(`[ACP] Registered offering: ${offering.name} @ $${offering.fee} USDC`);
-      } catch (e) {
-        // May already be registered — not a fatal error
-        if (!e.message?.includes("already")) {
-          console.warn(`[ACP] Could not register ${offering.name}:`, e.message);
+    // Create AcpClient with seller callbacks
+    const acpClient = new AcpClient({
+      acpContractClient: contractClient,
+      onNewTask: async (job, memoToSign) => {
+        console.log(`[ACP] New task received: job #${job.id} from ${job.clientAddress?.slice(0, 10)}...`);
+        console.log(`[ACP]   name: ${job.name}, phase: ${job.phase}`);
+
+        const offeringName = matchOffering(job);
+        if (!offeringName) {
+          console.log(`[ACP] No matching offering for job #${job.id} — rejecting`);
+          try {
+            await job.reject("No matching service offering found");
+          } catch (e) {
+            console.error(`[ACP] Failed to reject job #${job.id}:`, e.message);
+          }
+          return;
         }
-      }
-    }
 
-    // Start seller WebSocket runtime — listens for buyer job requests
-    await acp.startSellerRuntime({
-      onJobReceived: async (job) => {
-        console.log(`[ACP] Job received: ${job.offering} from ${job.buyerAddress?.slice(0, 10)}...`);
+        console.log(`[ACP] Matched offering: ${offeringName} for job #${job.id}`);
+
         try {
-          const result = await executeJob(job.offering, job.inputs || {});
-          console.log(`[ACP] Job completed: ${job.offering}`);
-          return result;
+          // Accept the job first
+          if (memoToSign) {
+            await memoToSign.sign(true, `Accepted — fulfilling via ${offeringName}`);
+            console.log(`[ACP] Signed memo for job #${job.id}`);
+          } else {
+            await job.accept(`Accepted — fulfilling via ${offeringName}`);
+            console.log(`[ACP] Accepted job #${job.id}`);
+          }
+
+          // Execute the service
+          const inputs = parseJobInputs(job);
+          const result = await executeJob(offeringName, inputs);
+          console.log(`[ACP] Executed ${offeringName} for job #${job.id}`);
+
+          // Deliver the result
+          const deliverable = typeof result === "string" ? result : result;
+          await job.deliver(deliverable);
+          console.log(`[ACP] Delivered result for job #${job.id}`);
         } catch (e) {
-          console.error(`[ACP] Job failed: ${job.offering}`, e.message);
-          return { error: e.message };
+          console.error(`[ACP] Error handling job #${job.id}:`, e.message);
+          try {
+            await job.reject(`Service error: ${e.message}`);
+          } catch (rejectErr) {
+            console.error(`[ACP] Failed to reject after error:`, rejectErr.message);
+          }
         }
+      },
+      onEvaluate: async (job) => {
+        // As a seller, auto-approve evaluations (trust the evaluator)
+        console.log(`[ACP] Evaluation request for job #${job.id}`);
       },
     });
 
+    // Initialize the client (connects WebSocket for real-time job notifications)
+    await acpClient.init();
+
     console.log("[ACP] Seller runtime live — listening for jobs on Virtuals Protocol");
-    console.log(`[ACP] ${OFFERINGS.length} offerings registered`);
+    console.log(`[ACP] Agent wallet: ${agentWalletAddress}`);
+    console.log(`[ACP] ${OFFERINGS.length} offerings available`);
     console.log("[ACP] Marketplace: https://app.virtuals.io/research/agent-commerce-protocol");
+
+    return acpClient;
   } catch (e) {
     console.error("[ACP] Failed to start runtime:", e.message);
   }

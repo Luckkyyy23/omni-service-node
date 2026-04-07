@@ -8,6 +8,7 @@
 
 import cron from "node-cron";
 import axios from "axios";
+import AcpClient, { AcpContractClientV2 } from "@virtuals-protocol/acp-node";
 
 const ACP_MARKETPLACE = "https://app.virtuals.io/research/agent-commerce-protocol";
 
@@ -93,26 +94,62 @@ async function scrapeBounties() {
 
 // Parse dollar amount from string
 function parsePriceUsd(priceStr = "") {
-  const match = priceStr.replace(/,/g, "").match(/[\d.]+/);
+  const match = String(priceStr).replace(/,/g, "").match(/[\d.]+/);
   return match ? parseFloat(match[0]) : 0;
 }
 
-// Submit a bid via ACP (uses ACP Node SDK if private key available)
+// Build an AcpClient instance for submitting bids (cached)
+let _acpClient = null;
+async function getAcpClient() {
+  if (_acpClient) return _acpClient;
+
+  const privateKey = process.env.AGENT_WALLET_PRIVATE_KEY;
+  const agentWalletAddress = process.env.AGENT_WALLET_ADDRESS || process.env.WALLET_ADDRESS;
+  if (!privateKey || !agentWalletAddress) return null;
+
+  try {
+    const contractClient = await AcpContractClientV2.build(
+      privateKey,
+      0, // sessionEntityKeyId
+      agentWalletAddress,
+    );
+    _acpClient = new AcpClient({
+      acpContractClient: contractClient,
+      skipSocketConnection: true, // bounty hunter only needs REST, not WebSocket
+    });
+    await _acpClient.init(true); // skipSocketConnection = true
+    return _acpClient;
+  } catch (e) {
+    console.error("[BOUNTY] Failed to build AcpClient:", e.message);
+    return null;
+  }
+}
+
+// Submit a bid/deliverable for a job via ACP SDK
 async function submitBid(bounty, result) {
   if (!process.env.AGENT_WALLET_PRIVATE_KEY) return false;
   try {
-    // If ACP SDK is running, submit fulfillment result
-    const acpPkg = await import("@virtuals-protocol/acp-node");
-    const ACPNode = acpPkg.default?.ACPNode || acpPkg.ACPNode;
-    const acp = new ACPNode({
-      walletPrivateKey:   process.env.AGENT_WALLET_PRIVATE_KEY,
-      agentWalletAddress: process.env.WALLET_ADDRESS,
-    });
-    // Respond to the bounty with our result
-    await acp.submitJobResponse({
-      jobId: bounty.jobId,
-      result: JSON.stringify(result),
-    });
+    const client = await getAcpClient();
+    if (!client) return false;
+
+    // Try to get the job by ID and deliver our result
+    const jobId = typeof bounty.jobId === "number" ? bounty.jobId : parseInt(bounty.jobId, 10);
+    if (isNaN(jobId)) {
+      console.warn("[BOUNTY] Invalid jobId — cannot submit via ACP SDK");
+      return false;
+    }
+
+    const job = await client.getJobById(jobId);
+    if (!job) {
+      console.warn(`[BOUNTY] Job #${jobId} not found on-chain`);
+      return false;
+    }
+
+    // Accept then deliver
+    await job.accept("OmniServiceNode autonomous bounty fulfillment");
+    const deliverable = typeof result === "string" ? result : result;
+    await job.deliver(deliverable);
+    console.log(`[BOUNTY] Delivered result for job #${jobId}`);
     return true;
   } catch (e) {
     console.error("[BOUNTY] Bid submission failed:", e.message);
@@ -120,7 +157,7 @@ async function submitBid(bounty, result) {
   }
 }
 
-// Log to bounty ledger file
+// Log to bounty ledger
 const BOUNTY_LOG = [];
 
 // ── Main bounty hunter loop ───────────────────────────────────────────────────
@@ -153,7 +190,7 @@ export function startBountyHunter() {
           submitted,
         });
 
-        console.log(`[BOUNTY] ${submitted ? "✅ BID SUBMITTED" : "⚠ Result prepared (submit manually)"}: ${bounty.title} @ ${bounty.price}`);
+        console.log(`[BOUNTY] ${submitted ? "BID SUBMITTED" : "Result prepared (submit manually)"}: ${bounty.title} @ ${bounty.price}`);
       }
     } catch (e) {
       console.error("[BOUNTY] Hunter cycle error:", e.message);
