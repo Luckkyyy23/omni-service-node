@@ -10,7 +10,7 @@
     "register": "node src/register.js",
     "acp:setup": "npx @virtuals-protocol/acp-node setup",
     "acp:serve": "node src/acp/handler.js",
-    "postinstall": "node scripts/patch-sdk.js"
+    "postinstall": "node scripts/patch-sdk.cjs"
   },
   "mcpName": "io.github.omni-service/omni-service-node",
   "dependencies": {
